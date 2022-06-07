@@ -65,4 +65,17 @@ router.post("/signin",(req,res)=>{
         })
     })
 })
+
+router.put("/updateProfile",requirelogin,(req,res)=>{
+    const {_id,name,phone,email,dob}=req.body;
+    bcryptjs.hash(dob,14).then(hashed=>{
+    User.findByIdAndUpdate(req.body._id,{
+        $set:{name:name,phone:phone,email:email,dob:hashed}
+    },{new:true}).exec((err,result)=>{
+        if(err)
+            return res.status(422).json({error:err})
+        else
+            res.json(result);
+    })})
+})
 module.exports=router;
