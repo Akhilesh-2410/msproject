@@ -1,14 +1,15 @@
 const express = require('express');
-const cors = require('cors');
+const mongoose = require('mongoose');
+const mongouri="mongodb+srv://msproject:msprojects5@cluster0.crroi.mongodb.net/?retryWrites=true&w=majority"
 const app=express();
-const postdata=require("./firebase_config");
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({extended:true}));
 
-app.post("/create",async(req,res)=>{
-    const data=req.body;
-    await postdata.add(data);
-    res.send('user added');
+require("./models/user");
+app.use(require("./routes/authen.js"));
+mongoose.connect(mongouri);
+mongoose.connection.on('connected',()=>{
+    console.log("we are connected to db");
 })
 app.get("/",(req,res)=>{
     res.send("Helooo broooooo");
