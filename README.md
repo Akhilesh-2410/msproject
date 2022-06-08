@@ -1,2 +1,0 @@
-# msproject
-Morgan Stanley project

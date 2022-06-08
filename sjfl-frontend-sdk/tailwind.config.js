@@ -5,6 +5,8 @@ module.exports = {
     colors: {
       white: "#ffffff",
       black: "#000000",
+      teal: "#008891",
+      gray: "d3d3d3",
       currentColor: "currentColor",
       transparent: "transparent",
       clinic: {
@@ -21,6 +23,7 @@ module.exports = {
   },
   variants: {
     extend: {},
+    
   },
   plugins: [],
 };
