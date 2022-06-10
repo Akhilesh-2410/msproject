@@ -11,7 +11,7 @@ module.exports = {
       transparent: "transparent",
       clinic: {
         100: "#E1E5F2",
-        300: "#BFDBF7",
+        300: "#eaf8fa",
         500: "#1F7A8C",
         700: "#022B3A",
       },
@@ -23,7 +23,6 @@ module.exports = {
   },
   variants: {
     extend: {},
-    
   },
   plugins: [],
 };

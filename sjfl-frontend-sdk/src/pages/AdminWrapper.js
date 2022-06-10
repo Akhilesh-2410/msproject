@@ -23,7 +23,7 @@ const AdminWrapper = () => {
           <p className="text-white text-lg">Logout</p>
         </button>
       </nav>
-      <nav className="block lg:hidden absolute bottom-0 p-6">
+      <nav className="block lg:hidden fixed bottom-0 p-6">
         <div className="shadow-md rounded-lg bg-clinic-700 flex items-center justify-center p-2 px-6">
           <button className="p-2 px-4 flex flex-col items-center justify-center">
             <FiDownloadCloud className="text-white w-6 h-6" />
