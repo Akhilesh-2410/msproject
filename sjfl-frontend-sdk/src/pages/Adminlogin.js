@@ -1,42 +1,51 @@
-import React from "react";
-import TextArea from "../components/TextArea";
+import React, { useState } from "react";
+import Button from "../components/Button";
 import TextField from "../components/TextField";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
+const AdminLogin = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isPasswordShown, setIsPasswordShown] = useState("");
 
-const Adminlogin = () => {
-    return (
-      <div className="Admin">
-          <div className = "flex flex-wrap justify-center mt-20">
-              <div className="w-full max-w-sm">
-              <h1 className="text-3xl font-oswald">Login</h1>
-                  <form action="" className="shadown-md bg-white rounded px-8 pt-6 pb-8 mb-4">
-                      <div className = "mb-5">
-                          <label htmlfor="" className="font-poppins block text-gray-700 text-sm font-bold mb-2">
-                              Username
-                          </label>
-                          <input type="text" className="shadow appreance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
-                          placeholder = "Username" />
-                      </div>
-                      <div className = "mb-6">
-                          <label htmlfor="password" className="font-poppins block text-gray-700 text-sm font-bold mb-2">
-                            Password
-                          </label>
-                          <input type="password" className="shadow appreance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
-                          placeholder = "Password" />
-                      </div>
-                      <div className="flex items-center justify-between">
-                          <button className = "bg-black hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Sign In
-                          </button>
-                    </div>
-                      
-                  </form>
-              </div> 
-          </div>
-        
+  return (
+    <main className="h-screen w-screen flex justify-center items-center bg-clinic-300">
+      <div className="section bg-white w-screen lg:w-[max(40vw,400px)] h-screen lg:h-fit px-6 py-20 space-y-6 flex flex-col shadow-lg rounded-md">
+        <h1 className="font-oswald font-medium text-4xl">Login as Admin</h1>
+        <TextField
+          className="w-full"
+          label="Username"
+          inputState={[username, setUsername]}
+        />
+        <div className="flex items-center justify-center w-full space-x-2">
+          <TextField
+            className="w-full"
+            label="Password"
+            type={isPasswordShown ? "text" : "password"}
+            inputState={[password, setPassword]}
+          />
+          <button
+            className="p-1 border-2 border-clinic-500 rounded-md"
+            onClick={(e) => setIsPasswordShown(!isPasswordShown)}
+          >
+            {isPasswordShown ? (
+              <AiOutlineEye className="text-clinic-500 h-8 w-8" />
+            ) : (
+              <AiOutlineEyeInvisible className="text-clinic-500 h-8 w-8" />
+            )}
+          </button>
+        </div>
+        <Button label="Submit" filled className="w-full ">
+          Submit
+        </Button>
+        <button className="group w-full flex items-center justify-center">
+          <p className="w-fit pb-1 border-b-white group-hover:border-b-clinic-500 border-b-2 text-center text-clinic-500">
+            Back to Home
+          </p>
+        </button>
       </div>
-    );
-  };
-  
-  export default Adminlogin;
-  
+    </main>
+  );
+};
+
+export default AdminLogin;

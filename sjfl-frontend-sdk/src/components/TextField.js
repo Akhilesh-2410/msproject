@@ -4,6 +4,7 @@ const TextField = ({
   className = "w-full",
   label = "Here",
   inputState = [null, () => {}],
+  type = "text",
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = inputState;
@@ -19,7 +20,7 @@ const TextField = ({
         {label}
       </p>
       <input
-        type="text"
+        type={type}
         placeholder={isFocused ? "" : `Enter ${label.toLowerCase()}`}
         onFocus={(e) => {
           setIsFocused(true);
