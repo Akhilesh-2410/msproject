@@ -21,6 +21,13 @@ router.post("/postdoc",requirelogin,(req,res)=>{
     })
 })
 
+router.get("/getAllPost",requirelogin,(req,res)=>{
+    userpost.find().then(posts=>{
+        res.json(posts)
+    }).catch(err=>{
+        console.log(err);
+    })
+})
 
 router.put("/updatedoc",requirelogin,(req,res)=>{
     const {requirementType,data}=req.body;
