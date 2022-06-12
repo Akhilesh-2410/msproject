@@ -64,6 +64,7 @@ router.post("/admin-signup", (req, res) => {
       console.log(err);
     });
 });
+
 router.post("/signup", (req, res) => {
   const { name, email, dob, phone } = req.body;
   if (!email || !dob || !name || !phone)
@@ -71,6 +72,7 @@ router.post("/signup", (req, res) => {
   User.findOne({ email: email })
     .then((saveduser) => {
       if (saveduser) {
+        console.log(saveduser)
         return res.status(200).json({ error: "User already exists" });
       }
       bcryptjs.hash(dob, 14).then((hashed) => {
@@ -94,26 +96,31 @@ router.post("/signup", (req, res) => {
       console.log(err);
     });
 });
+
 router.post("/signin", (req, res) => {
   const { uid, dob } = req.body;
   if (!uid || !dob)
     return res.status(422).json({ error: "please add uid/dob" });
-  User.findOne({ _id: uid }).then((saveduser) => {
-    if (!saveduser)
-      return res.status(422).json({ error: "please signup before signing in" });
-    bcryptjs
-      .compare(dob, saveduser.dob)
-      .then((doMatch) => {
-        if (doMatch) {
-          const { _id, name, email, phone, dob } = saveduser;
-          const token = jwt.sign({ _id: saveduser._id }, JWT_Secret);
-          res.json({ token, user: { _id, email, name, phone, dob } });
-        } else return res.status(422).json({ error: "Invalid uid/dob" });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  User.findOne({ _id: uid })
+    .then((saveduser) => {
+      if (!saveduser)
+        return res
+          .status(422)
+          .json({ error: "please signup before signing in" });
+      bcryptjs
+        .compare(dob, saveduser.dob)
+        .then((doMatch) => {
+          if (doMatch) {
+            const { _id, name, email, phone, dob } = saveduser;
+            const token = jwt.sign({ _id: saveduser._id }, JWT_Secret);
+            res.json({ token, user: { _id, email, name, phone, dob } });
+          } else return res.status(422).json({ error: "Invalid uid/dob" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => res.status(300).json({error: "User not found"}));
 });
 
 router.put("/updateProfile", requirelogin, (req, res) => {

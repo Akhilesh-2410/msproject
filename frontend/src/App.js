@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
 import AdminWrapper from "./pages/AdminWrapper";
 import RequestForAid from "./pages/RequestForAid";
@@ -8,6 +14,23 @@ import SubmissionPreview from "./pages/SubmissionPreview";
 import Submissions from "./pages/Submissions";
 import UserPageWrapper from "./pages/UserPageWrapper";
 import "./styles/tailwind.output.css";
+import i18n from "i18next";
+import { useTranslation, initReactI18next } from "react-i18next";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      translation: {
+        "Welcome to React": "Welcome to React and react-i18next",
+      },
+    },
+  },
+  lng: "en",
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 const App = () => {
   return (
