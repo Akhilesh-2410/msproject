@@ -45,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "A custom Create-react-app boilerplate with TailwindCSS and PostCSS.",
+  "main": "postcss.config.js",
+  "author": "",
+  "license": "ISC"
 }
