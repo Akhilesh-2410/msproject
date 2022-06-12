@@ -507,6 +507,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 8rem;
 }
 
+.my-\[72px\] {
+  margin-top: 72px;
+  margin-bottom: 72px;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -521,6 +526,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-\[\] {
+  margin-top: ;
+}
+
+.mt-\[72px\] {
+  margin-top: 72px;
 }
 
 .block {
@@ -579,6 +592,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.h-12 {
+  height: 3rem;
 }
 
 .max-h-36 {
@@ -934,6 +951,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.75rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-\[72px\] {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.py-\[2px\] {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.py-\[96px\] {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -1161,6 +1198,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 0px;
   }
 
+  .lg\:block {
+    display: block;
+  }
+
   .lg\:flex {
     display: flex;
   }
@@ -1173,6 +1214,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
+  }
+
+  .lg\:h-full {
+    height: 100%;
   }
 
   .lg\:w-\[max\(40vw\2c 400px\)\] {
@@ -1244,7 +1289,22 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding-right: calc(100vw / 12);
   }
 
+  .lg\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .lg\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .lg\:pr-\[10vw\] {
     padding-right: 10vw;
+  }
+
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
