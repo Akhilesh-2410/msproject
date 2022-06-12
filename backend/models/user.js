@@ -84,32 +84,19 @@ const userschema=new mongoose.Schema(
             },
             applied_for_assitance:{
                 type:String,
-                required:true
             },
             financical_assitance_being_received:{
                 type:String,
-                required:true
             },
             timePeriod:{
                 type:String,
-                requird:true
             },
             amountReceived:{
                 type:String,
-                required:true
             },
             isRenewed:{
                 type:String,
-                required:true
             },
-        applied_for_assitance:{
-            type:String,
-            required:true
-        },
-        timePeriod:{
-            type:String,
-            requird:true
-            }
     }
 )
 module.exports=mongoose.model("User",userschema);
