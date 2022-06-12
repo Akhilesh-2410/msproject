@@ -1,7 +1,5 @@
-
-
-.box { 
-    position: relative; 
+.box {
+    position: relative;
     height: 100vh;
     width: 100%;
     display: block;
@@ -25,30 +23,28 @@
 }
 
 
-.top-Heading
-{
+.top-Heading {
     font-family: 'Poppins', sans-serif;
-        position: relative;
-        color: #ffffff;  
-        font-size: 4rem;
-        line-height: 0.9;
-        text-align: center;
-        padding-top: 10%;
-padding-left: 10%;
-padding-right: 10%;
-padding-bottom: 5%;      
+    position: relative;
+    color: #ffffff;
+    font-size: 4rem;
+    line-height: 0.9;
+    text-align: center;
+    padding-top: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
 }
 
-.top-subtitle
-{
+.top-subtitle {
     font-family: 'Poppins', sans-serif;
-        position: relative;
-        color: #ffffff;  
-        font-size: 1rem;
-        line-height: 0.9;
-        text-align: center;
-        margin: 2%;
-      
+    position: relative;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 0.9;
+    text-align: center;
+    margin: 2%;
+
 }
 
 
@@ -151,7 +147,7 @@ padding-bottom: 5%;
 
 h3 {
     text-align: center;
-    
+
 }
 
 .feature--icon {
@@ -235,7 +231,7 @@ h3 {
     border: 1px solid #ffffff;
     border-radius: 4px;
     padding: 0.5%;
-    margin-right: 30px;
+    margin: 10%;
     align-items: center;
 }
 
@@ -410,7 +406,7 @@ h3 {
 .left-title {
     font-family: 'Poppins', sans-serif;
     color: #222222;
-    font-size: 36px;
+    font-size: 56px;
     font-weight: 400;
     text-align: justify;
     text-align: center;
@@ -438,7 +434,7 @@ h3 {
     font-weight: 200;
     text-align: justify;
     text-align: center;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .progress-bar {
@@ -494,7 +490,6 @@ h3 {
     height: 30px;
     margin-top: 20px;
     margin-right: 35px;
-    
+
 
 }
-
