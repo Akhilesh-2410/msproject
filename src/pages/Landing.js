@@ -2,22 +2,6 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import '../styles/landstyle.css'
 
-// const styleup = {
-
-//     backgroundImage: 'url("https://img.freepik.com/free-photo/group-kids-friend-laughing-together_1150-3911.jpg?t=st=1655021111~exp=1655021711~hmac=0a3ab391ed11266dad31ff520f6b5f5a3dd96e6da82d5bb8706acf85f0e6f096&w=826")',
-//     backgroundPosition: 'center center',
-//     backgroundAttachment: 'fixed',
-//     backgroundRepeat: 'no-repeat',
-//     backgroundSize: 'cover',
-//     maxWidth: '100%',
-//     height: '100%',
-    
-
-
-// };
-
-
-
 
 const Landing = () => {
     return (
@@ -29,9 +13,6 @@ const Landing = () => {
                 <div className="top-Heading">We are building your future!</div>
                 <div className="top-subtitle">Once a St. Judes child is always a St. Judes child</div>
 
-
-
-               
             </div>
 
 
