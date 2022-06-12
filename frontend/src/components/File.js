@@ -23,10 +23,6 @@ const File = ({
           isFocused ? "border-clinic-500" : "border-clinic-700"
         }`} type="file" id="formFileMultiple" multiple/>
     </div>
-
-
-       
-
     )
 }
 

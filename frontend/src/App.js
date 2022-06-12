@@ -12,6 +12,7 @@ import RequestForAid from "./pages/RequestForAid";
 import RequestForAidNonFin from "./pages/RequestForAidNonFin";
 import SubmissionPreview from "./pages/SubmissionPreview";
 import Submissions from "./pages/Submissions";
+import MonthlyUpdate from "./pages/MonthlyUpdate";
 import UserPageWrapper from "./pages/UserPageWrapper";
 import "./styles/tailwind.output.css";
 import { useTranslation } from "react-i18next";
@@ -52,6 +53,10 @@ const App = () => {
                 <Route
                   path="request-aid/non-financial"
                   element={<RequestForAidNonFin />}
+                />
+                <Route
+                  path="request-aid/monthly-update"
+                  element={<MonthlyUpdate/>}
                 />
               </Route>
               <Route index element={<Landing />} />
