@@ -21,7 +21,7 @@ const TextField = ({
       </p>
       <input
         type={type}
-        placeholder={isFocused ? "" : `Enter ${label.toLowerCase()}`}
+        placeholder={isFocused ? "" : label}
         onFocus={(e) => {
           setIsFocused(true);
         }}

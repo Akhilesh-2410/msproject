@@ -96,21 +96,21 @@ const resources = {
   hi: {
     translation: {
       // Navbar
-      "Request for Aid": "Request for Aid",
-      "Contact Us": "Contact Us",
+      "Request for Aid": "सहायता के लिए अनुरोध",
+      "Contact Us": "संपर्क करें",
       // Buttons
-      Submit: "Submit",
-      Cancel: "Cancel",
+      Submit: "प्रस्तुत करना",
+      Cancel: "रद्द करना",
       // Sections
-      "Request for Financial Aid": "Request for Financial Aid",
-      "Academic Info": "Academic Info",
+      "Request for Financial Aid": "वित्तीय सहायता के लिए अनुरोध",
+      "Academic Info": "शैक्षणिक सूचना",
       "Scholarship/ Financial Assistance received already":
-        "Scholarship/ Financial Assistance received already",
-      "Assistance required": "Assistance required",
-      Documents: "Documents",
-      Name: "Name",
-      "Date of Birth": "Date of Birth",
-      "Contact no.": "Contact no.",
+        "छात्रवृत्ति/वित्तीय सहायता पहले ही प्राप्त हो चुकी है",
+      "Assistance required": "आवश्यक सहायता",
+      Documents: "दस्तावेजों",
+      Name: "नाम",
+      "Date of Birth": "जन्म की तारीख",
+      "Contact no.": "संपर्क नंबर",
       "Email Address": "Email Address",
       "Aadhar Number": "Aadhar Number",
       "Parent/Guardian Name": "Parent/Guardian Name",

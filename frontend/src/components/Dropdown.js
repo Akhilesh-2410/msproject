@@ -34,7 +34,7 @@ const Dropdown = ({
             setValue(e.target.value);
             setError("");
           }}
-          className={` px-4 py-2 w-full rounded-lg text-slate bg-cloud bg-clip-padding bg-no-repeat border-2 border-solid ${
+          className={` px-2 py-2 w-full rounded-lg text-slate bg-cloud bg-clip-padding bg-no-repeat border-2 border-solid ${
             error.length !== 0 ? "border-red" : "border-cloud"
           } ${
             value.length <= 0 ? "text-dark-gray" : "text-slate"

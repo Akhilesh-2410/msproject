@@ -3,6 +3,7 @@ import TextArea from "../components/TextArea";
 import TextField from "../components/TextField";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
+import {useTranslation} from "react-i18next";
 
 const RequestForAid = () => {
   const options = ["Yes", "No"];
@@ -13,28 +14,31 @@ const RequestForAid = () => {
     "Secondary",
     "Primary Education",
   ];
+
+  const {t, i18n} = useTranslation();
+
   return (
     <main className="w-full space-y-20">
       <div className="w-full">
         <section className="w-full flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-y-0">
           <div className="w-full lg:w-1/2 flex-col space-y-1">
-            <h1 className="text-3xl font-oswald">Academic Info</h1>
+            <h1 className="text-3xl font-oswald">{t("Academic Info")}</h1>
             <h2 className="font-poppins text-sm">
               Provide your Academic Info here.
             </h2>
           </div>
           <div className="w-full lg:w-1/2 flex flex-col space-y-3">
-            <TextField label="Name of Institute" className="w-full" />
+            <TextField label={t("Name of Institute")} className="w-full" />
             <div className="flex flex-col lg:flex-row items-center w-full lg:space-x-2 space-y-4 lg:space-y-0">
               <Dropdown
                 options={["CBSE", "State Board", "ICSE"]}
                 className="w-full"
-                placeholder="Select Board of Education"
+                placeholder={t("Board of Education")}
               />
               <Dropdown
                 options={["Private", "Public"]}
                 className="w-full"
-                placeholder="Select Type of Institute"
+                placeholder={t("Type of Institute")}
               />
             </div>
             <div className="flex items-center w-full space-x-2">
@@ -62,9 +66,11 @@ const RequestForAid = () => {
             <TextField label="Language(s)" className="w-full" />
             <TextField label="Profession" className="w-full" />
             <TextField label="Organization" className="w-full" />
-            <Dropdown options={grade} className="w-full">
-              Select Grade
-            </Dropdown>
+            <Dropdown
+              options={["Private", "Public"]}
+              className="w-full"
+              placeholder="Grade"
+            />
 
             <TextArea label="Purpose for the Aid" className="w-full" />
 
