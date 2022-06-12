@@ -80,7 +80,7 @@ router.post("/signup",(req,res)=>{
         console.log(err);
       });
   });
-});
+
 
 router.post("/admin-signup", (req, res) => {
   const { name, email, password, phone } = req.body;
@@ -164,24 +164,6 @@ router.post("/signin", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-router.put("/updateProfile", requirelogin, (req, res) => {
-  const { _id, name, phone, email, dob } = req.body;
-  bcryptjs.hash(dob, 14).then((hashed) => {
-    User.findByIdAndUpdate(
-      req.body._id,
-      {
-        $set: { name: name, phone: phone, email: email, dob: hashed },
-      },
-      { new: true }
-    ).exec((err, result) => {
-      if (err) return res.status(422).json({ error: err });
-      else res.json(result);
-    });
-  });
-});
-module.exports = router;
-=======
 router.put("/updateProfile",requirelogin,(req,res)=>{
     const a=req.body;
     bcryptjs.hash(dob,14).then(hashed=>{
@@ -195,4 +177,3 @@ router.put("/updateProfile",requirelogin,(req,res)=>{
     })})
 })
 module.exports=router;
->>>>>>> 2d08b29505559fae30ac32dea1669c4ec119aa75
