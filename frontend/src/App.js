@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
 import AdminWrapper from "./pages/AdminWrapper";
 import RequestForAid from "./pages/RequestForAid";
 import RequestForAidNonFin from "./pages/RequestForAidNonFin";
+import SubmissionPreview from "./pages/SubmissionPreview";
 import Submissions from "./pages/Submissions";
 import UserPageWrapper from "./pages/UserPageWrapper";
 import "./styles/tailwind.output.css";
@@ -16,6 +17,8 @@ const App = () => {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminWrapper />}>
             <Route path="submissions" element={<Submissions />} />
+            <Route path="submissions/preview" element={<SubmissionPreview />} />
+            <Route index element={<Navigate to="/admin/submissions" />} />
           </Route>
           <Route path="/" element={<UserPageWrapper />}>
             <Route path="forms" element={<Outlet />}>

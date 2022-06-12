@@ -1,12 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import TextField from "../components/TextField";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import axios from "axios";
+import { ADMIN_SIGNIN_URL } from "../api/APIRoutes";
+import {useNavigate} from "react-router-dom"
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordShown, setIsPasswordShown] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    axios
+      .post(
+        ADMIN_SIGNIN_URL,
+        { username, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log("SIGNIN SUCCESS", res.data);
+        localStorage.setItem("access_token", res.data.token);
+        navigate("/admin");
+      })
+      .catch((err) => console.log("SIGNIN ERROR", err));
+  };
 
   return (
     <main className="h-screen w-screen flex justify-center items-center bg-clinic-300">
@@ -35,7 +59,12 @@ const AdminLogin = () => {
             )}
           </button>
         </div>
-        <Button label="Submit" filled className="w-full ">
+        <Button
+          label="Submit"
+          filled
+          className="w-full"
+          onClick={(e) => handleLogin(e)}
+        >
           Submit
         </Button>
         <button className="group w-full flex items-center justify-center">

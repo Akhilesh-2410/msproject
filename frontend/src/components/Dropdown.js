@@ -1,112 +1,69 @@
-import React, { useState, useEffect, useRef } from "react";
-
-
-let useClickOutside = (handler) => {
-    let domNode = useRef();
-
-    useEffect(() => {
-        let maybeHandler = (event) => {
-            if (!domNode.current.contains(event.target)) {
-                handler();
-            }
-        };
-
-        document.addEventListener("mousedown", maybeHandler);
-
-        return () => {
-            document.removeEventListener("mousedown", maybeHandler);
-        };
-    });
-
-    return domNode;
-};
+import React, { useState, useEffect } from "react";
+import { AiFillExclamationCircle } from "react-icons/ai";
 
 const Dropdown = ({
-    type = 'submit',
-    className = '',
-    processing,
-    children,
-    options,
-    consell,
-    grade,
-    menus
+  valueState = ["", (v) => {}],
+  errorState = ["", (v) => {}],
+  placeholder = "",
+  options = [],
+  title = "",
+  isDisabled = false,
+  className = "w-full",
 }) => {
-    const [showOptions, setShowOptions] = useState(false);
-    const handleClick = () => {
-        setShowOptions(!showOptions);
+  const [value, setValue] = valueState;
+  const [error, setError] = errorState;
+
+  useEffect(() => {
+    if (value.length <= 0 && placeholder.length <= 0) {
+      setValue(options[0]);
     }
+  }, []);
 
-    let domNode = useClickOutside(() => {
-        setShowOptions(false);
-    });
-
-    return (
-        <div ref={domNode} class="relative inline-block text-left">
-            <div>
-                <button onClick={handleClick} type={type} className={
-                    `w-full inline-flex font-poppins border-2 border-clinic-700  justify-center w-full rounded-md border border-teal-300 shadow-sm px-2 py-2 bg-white text-sm font-medium  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-100 focus:ring-teal-500 ${processing && 'opacity-25'
-                    } ` + className
-                }
-                    disabled={processing}
-
-                    id="menu-button" aria-expanded="true" aria-haspopup="true">{children}
-
-
-                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-
-            {showOptions && (
-
-
-                <div class="origin-top-right relative right-0 mt-2 w-55 rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                    <div class="bg-white py-1" role="none">
-
-                        {options && options.map((option) =>
-
-                            <a href="#"
-                                class="text-gray-700 block px-6 py-2 text-sm hover:bg-gray-400 hover:text-white "
-                                role="menuitem"
-                                tabindex="-1"
-                                id="menu-item-0">{option}</a>
-                        )}
-
-                        {consell && consell.map((counsel) =>
-
-                            <a href="#"
-                                class="text-gray-700 block px-6 py-2 text-sm hover:bg-gray-400 hover:text-white "
-                                role="menuitem"
-                                tabindex="-1"
-                                id="menu-item-0">{counsel}</a>
-                        )}
-
-                        {grade && grade.map((grad) =>
-
-                            <a href="#"
-                                class="text-gray-700 block px-6 py-2 text-sm hover:bg-gray-400 hover:text-white "
-                                role="menuitem"
-                                tabindex="-1"
-                                id="menu-item-0">{grad}</a>
-                        )}
-
-                        {menus && menus.map((menu) =>
-
-                            <a href={menu.link}
-                                class="text-gray-700 block px-6 py-2 text-sm hover:bg-gray-400 hover:text-white "
-                                role="menuitem"
-                                tabindex="-1"
-                                id="menu-item-0">{menu}</a>
-                        )}
-
-                    </div>
-                </div>
-
-            )}
-        </div>)
-}
-
+  return (
+    <div
+      className={`${className} flex flex-col items-start justify-center font-nunito space-y-2`}
+    >
+      <label className="text-dark-gray">{title}</label>
+      <div className="flex space-x-2 items-center w-full">
+        <select
+          disabled={isDisabled}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => {
+            e.preventDefault();
+            setValue(e.target.value);
+            setError("");
+          }}
+          className={` px-4 py-2 w-full rounded-lg text-slate bg-cloud bg-clip-padding bg-no-repeat border-2 border-solid ${
+            error.length !== 0 ? "border-red" : "border-cloud"
+          } ${
+            value.length <= 0 ? "text-dark-gray" : "text-slate"
+          } first-letter:transition ease-in-out m-0 focus:outline-none focus:border-mid-violet`}
+        >
+          {placeholder.length > 0 && (
+            <option value="" selected disabled>
+              {placeholder}
+            </option>
+          )}
+          {options.map((option, index) => (
+            <option
+              key={index}
+              selected={index === 0 && placeholder.length > 0}
+              value={option}
+            >
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+      {error.length !== 0 && (
+        <div className="flex items-center space-x-2 text-xs text-red">
+          <AiFillExclamationCircle />
+          <p className="">{error}</p>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Dropdown;
-
