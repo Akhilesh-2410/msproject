@@ -1,11 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const cloudinary = require("cloudinary").v2;
-const streamifier = require("streamifier");
-const multer = require("multer");
-
-const fileUpload = multer();
+const cloudinary = require("./cloudinary");
+const upload = require("./multer");
 
 const mongouri =
   "mongodb+srv://msproject:msprojects5@cluster0.crroi.mongodb.net/?retryWrites=true&w=majority";
@@ -29,27 +26,19 @@ app.get("/", (req, res) => {
   res.send("Helooo broooooo");
 });
 
-app.post("/upload", fileUpload.single("file"), (req, res, next) => {
-  let streamUpload = (req) => {
-    return new Promise((resolve, reject) => {
-      let stream = cloudinary.uploader.upload_stream((error, result) => {
-        if (result) {
-          resolve(result);
-        } else {
-          reject(error);
-        }
-      });
-
-      streamifier.createReadStream(req.file.buffer).pipe(stream);
+app.post("/upload", upload.single("file"), async (req, res) => {
+  try {
+    // Upload image to cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path);
+    console.log(req);
+    console.log(result)
+    res.status(200).send({
+      name: req.file.originalname,
+      url: result.secure_url,
     });
-  };
-
-  async function upload(req) {
-    let result = await streamUpload(req);
-    console.log(result);
+  } catch (err) {
+    console.log(err);
   }
-
-  upload(req);
 });
 
 app.listen(5000, (req, res) => {
