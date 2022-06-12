@@ -14,8 +14,8 @@ import SubmissionPreview from "./pages/SubmissionPreview";
 import Submissions from "./pages/Submissions";
 import UserPageWrapper from "./pages/UserPageWrapper";
 import "./styles/tailwind.output.css";
-import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import Landing from "./pages/Landing";
 
 export const TransContext = React.createContext();
 
@@ -43,8 +43,8 @@ const App = () => {
               <Route index element={<Navigate to="/admin/submissions" />} />
             </Route>
             <Route path="/test" element={<div>{t("Welcome to React")}</div>} />
-            <Route path="/" element={<UserPageWrapper />}>
-              <Route path="forms" element={<Outlet />}>
+            <Route path="/" element={<Outlet />}>
+              <Route path="forms" element={<UserPageWrapper />}>
                 <Route
                   path="request-aid/financial"
                   element={<RequestForAid />}
@@ -54,6 +54,7 @@ const App = () => {
                   element={<RequestForAidNonFin />}
                 />
               </Route>
+              <Route index element={<Landing />} />
             </Route>
           </Routes>
         </BrowserRouter>
