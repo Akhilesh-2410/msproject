@@ -58,9 +58,9 @@ router.post("/admin-signup",(req,res)=>{
         console.log(err);
     })
 })
-
 router.post("/signup",(req,res)=>{
     const a=req.body
+    console.log(a.uid);
     if(!a)
         return res.status(422).json({error:"You have to give information"});
     User.findOne({uid:a.uid}).then(saveduser=>{
@@ -68,9 +68,7 @@ router.post("/signup",(req,res)=>{
             return res.status(200).json({error:"User already exists"});
         }
         bcryptjs.hash(a.dob,14).then(hashed=>{  
-            const user=new User({
-                a
-            })
+            const user=new User(a)
             user.save().then(user=>{
                 res.json({message:"saved succesfully"})
             }).catch(err=>{
