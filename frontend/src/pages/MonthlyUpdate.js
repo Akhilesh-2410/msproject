@@ -32,7 +32,7 @@ const MonthlyUpdate = () => {
                             
 
                             <div className="flex items-center w-full space-x-2">
-                                <TextArea label="Purpose for the Aid" className="w-full" inputState={[Purpose, setPurpose]} />
+                                <TextArea label="Any Health issues observed?" className="w-full" inputState={[Purpose, setPurpose]} />
                             </div>
 
 

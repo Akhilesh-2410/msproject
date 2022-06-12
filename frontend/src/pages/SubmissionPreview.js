@@ -109,6 +109,47 @@ const SubmissionPreview = () => {
           </section>
         )}
 
+        {type === 2 && (
+          <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
+            <h1 className="font-semibold text-3xl w-full lg:w-1/4">
+              Additional Info
+            </h1>
+
+            <div className="w-full space-y-6">
+              <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
+                <TextOutput
+                  label={"Language"}
+                  text={"English"}
+                />
+                <TextOutput
+                  label={"Profession"}
+                  text={"Student"}
+                />
+                <TextOutput label={"Organisation"} text={"PSG College of technology"} />
+                <TextOutput label={"Grade"} text={"VIII"} />
+                <TextOutput label={"Purpose for Aid"} text={"NA"} />
+                <TextOutput label={"Counselling Type"} text={"Induction Counselling"} />
+                <TextOutput label={"Received Any help Previously"} text={"No"} />
+                <TextOutput label={"Any other help needed"} text={"NA"} />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {type === 3 && (
+          <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
+            <h1 className="font-semibold text-3xl w-full lg:w-1/4">
+              Monthly Updates
+            </h1>
+
+            <div className="w-full space-y-6">
+              <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
+                <TextOutput label={"Any Health issues observed?"} text={"NA"} />
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
           <h1 className="font-semibold text-3xl w-full lg:w-1/4">
             Assistance required
@@ -130,7 +171,10 @@ const SubmissionPreview = () => {
 
           <div className="w-full space-y-6"></div>
         </section>
+
+
       </main>
+
     </main>
   );
 };
