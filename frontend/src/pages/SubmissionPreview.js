@@ -10,7 +10,6 @@ const SubmissionPreview = () => {
   useEffect(() => {
     setUid(searchParams.get("uid"));
     setType(parseInt(searchParams.get("type")));
-
   }, []);
 
   return (
@@ -33,7 +32,7 @@ const SubmissionPreview = () => {
           </div>
         </div>
       </nav>
-      <section className="p-6 lg:p-8 w-full space-y-6 my-32 lg:my-24">
+      <main className="p-6 lg:p-8 w-full space-y-6 my-32 lg:my-24">
         <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
           <div className="w-full lg:w-1/4 flex items-center lg:justify-start justify-center">
             <img
@@ -86,24 +85,29 @@ const SubmissionPreview = () => {
           </div>
         </section>
 
-        <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
-          <h1 className="font-semibold text-3xl w-full lg:w-1/4">
-            Scholarship/ Financial Assistance received already
-          </h1>
+        {type === 1 && (
+          <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
+            <h1 className="font-semibold text-3xl w-full lg:w-1/4">
+              Scholarship/ Financial Assistance received already
+            </h1>
 
-          <div className="w-full space-y-6">
-            <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
-              <TextOutput label={"Applied for any assistance ?"} text={"No"} />
-              <TextOutput
-                label={"Financial Assistance being received"}
-                text={"CBSE"}
-              />
-              <TextOutput label={"Assisted for Period of"} text={"NA"} />
-              <TextOutput label={"Total Amount received"} text={"NA"} />
-              <TextOutput label={"Will be renewed"} text={"No"} />
+            <div className="w-full space-y-6">
+              <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
+                <TextOutput
+                  label={"Applied for any assistance ?"}
+                  text={"No"}
+                />
+                <TextOutput
+                  label={"Financial Assistance being received"}
+                  text={"CBSE"}
+                />
+                <TextOutput label={"Assisted for Period of"} text={"NA"} />
+                <TextOutput label={"Total Amount received"} text={"NA"} />
+                <TextOutput label={"Will be renewed"} text={"No"} />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
           <h1 className="font-semibold text-3xl w-full lg:w-1/4">
@@ -126,7 +130,7 @@ const SubmissionPreview = () => {
 
           <div className="w-full space-y-6"></div>
         </section>
-      </section>
+      </main>
     </main>
   );
 };

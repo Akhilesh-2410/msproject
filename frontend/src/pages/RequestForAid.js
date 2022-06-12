@@ -3,7 +3,7 @@ import TextArea from "../components/TextArea";
 import TextField from "../components/TextField";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const RequestForAid = () => {
   const options = ["Yes", "No"];
@@ -15,7 +15,10 @@ const RequestForAid = () => {
     "Primary Education",
   ];
 
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const [nameOfInstitute, setNameOfInstitute] = useState("");
+  const [boardOfEdu, setBoardOfEdu] = useState("");
 
   return (
     <main className="w-full space-y-20">
@@ -28,12 +31,17 @@ const RequestForAid = () => {
             </h2>
           </div>
           <div className="w-full lg:w-1/2 flex flex-col space-y-3">
-            <TextField label={t("Name of Institute")} className="w-full" />
+            <TextField
+              label={t("Name of Institute")}
+              className="w-full"
+              inputState={[nameOfInstitute, setNameOfInstitute]}
+            />
             <div className="flex flex-col lg:flex-row items-center w-full lg:space-x-2 space-y-4 lg:space-y-0">
               <Dropdown
                 options={["CBSE", "State Board", "ICSE"]}
                 className="w-full"
                 placeholder={t("Board of Education")}
+                valueState={[boardOfEdu, setBoardOfEdu]}
               />
               <Dropdown
                 options={["Private", "Public"]}
