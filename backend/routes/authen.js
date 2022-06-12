@@ -67,7 +67,8 @@ router.post("/signup",(req,res)=>{
         if(saveduser){
             return res.status(200).json({error:"User already exists"});
         }
-        bcryptjs.hash(a.dob,14).then(hashed=>{  
+        bcryptjs.hash(a.dob,14).then(hashed=>{ 
+            a.dob=hashed; 
             const user=new User(a)
             user.save().then(user=>{
                 res.json({message:"saved succesfully"})
@@ -101,10 +102,10 @@ router.post("/signin",(req,res)=>{
 })
 
 router.put("/updateProfile",requirelogin,(req,res)=>{
-    const {_id,name,phone,email,dob}=req.body;
+    const a=req.body;
     bcryptjs.hash(dob,14).then(hashed=>{
-    User.findByIdAndUpdate(req.body._id,{
-        $set:{name:name,phone:phone,email:email,dob:hashed}
+    User.findByIdAndUpdate(a._id,{
+        $set:a
     },{new:true}).exec((err,result)=>{
         if(err)
             return res.status(422).json({error:err})
