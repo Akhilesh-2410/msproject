@@ -58,6 +58,7 @@ router.post("/admin-signup",(req,res)=>{
         console.log(err);
     })
 })
+
 router.post("/signup",(req,res)=>{
     const a=req.body
     if(!a)
