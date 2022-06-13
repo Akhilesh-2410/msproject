@@ -1227,10 +1227,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 25%;
   }
 
-  .lg\:w-full {
-    width: 100%;
-  }
-
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
