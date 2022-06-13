@@ -18,6 +18,7 @@ import "./styles/tailwind.output.css";
 import { useTranslation } from "react-i18next";
 import Landing from "./pages/Landing";
 
+
 export const TransContext = React.createContext();
 
 const App = () => {
@@ -56,8 +57,10 @@ const App = () => {
                 />
                 <Route
                   path="request-aid/monthly-update"
-                  element={<MonthlyUpdate/>}
+                  element={<MonthlyUpdate />}
                 />
+
+
               </Route>
               <Route index element={<Landing />} />
             </Route>
