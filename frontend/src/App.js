@@ -28,7 +28,7 @@ const App = () => {
 
   useEffect(() => {
     i18n.changeLanguage(language);
-  }, []);
+  }, [language]);
 
   return (
     <TransContext.Provider value={{ t, language, setLanguage }}>

@@ -9,15 +9,22 @@ const userpostschema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  data: [
+  data: {
+    type: Object,
+    required: true,
+  },
+  document: [
     {
+      requirementType: {
+        type: String,
+      },
       name: {
         type: String,
-        required: true,
+        required:true
       },
       url: {
         type: String,
-        required: true,
+        required:true
       },
     },
   ],
