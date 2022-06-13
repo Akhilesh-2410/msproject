@@ -20,7 +20,7 @@ const TextArea = ({
       </p>
       <textarea
         type="text"
-        placeholder={isFocused ? "" : `Enter ${label.toLowerCase()}`}
+        placeholder={isFocused ? "" : `${label}`}
         onFocus={(e) => {
           setIsFocused(true);
         }}

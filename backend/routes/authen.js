@@ -1,21 +1,37 @@
-const express = require('express');
-const router=express.Router();
-const mongoose = require('mongoose');
-const User=mongoose.model("User");
-const bcryptjs = require('bcryptjs')
-const jwt = require('jsonwebtoken');
-const JWT_Secret="edwhfkwoddjfoiwdjfoijwdofijww";
-const requirelogin =require("./middleware.js")
-const admin=mongoose.model("Admin");
-const userpost=mongoose.model("UserPosts");
-const Vonage = require('@vonage/server-sdk')
+const express = require("express");
+const router = express.Router();
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const JWT_Secret = "edwhfkwoddjfoiwdjfoijwdofijww";
+const requirelogin = require("./middleware.js");
+const admin = mongoose.model("Admin");
+const userpost = mongoose.model("UserPosts");
+const Vonage = require("@vonage/server-sdk");
 //JrFluWD89l_yp9NL5ROQB3tBc554-d_pPLllDnY0-twilio
 const vonage = new Vonage({
   apiKey: "73cff7e5",
   apiSecret: "Ph9VNPGCIV112JKI",
 });
 
-    vonage.message.sendSms(from, to, text, (err, responseData) => {
+router.post("/approval", requirelogin, (req, res) => {
+  userpost
+    .findByIdAndUpdate(
+      req.body.uid,
+      {
+        $set: { status: req.body.status },
+      },
+      { new: true }
+    )
+    .exec((err, result) => {
+      if (err) return res.status(422).json({ error: err });
+      else res.json(result);
+    });
+  const from = "St.JUDES";
+  const to = req.body.phno;
+  const text = `Your status for ${req.body.requirementType} has been ${req.body.status}.\nPlease contact admin for further details.\nThank you have a nice day";`;
+  vonage.message.sendSms(from, to, text, (err, responseData) => {
     if (err) {
       console.log(err);
     } else {
@@ -28,6 +44,7 @@ const vonage = new Vonage({
       }
     }
   });
+});
 
 router.get("/protected", requirelogin, (req, res) => {
   res.send("HELLO boiiii");
@@ -93,7 +110,7 @@ router.post("/signup", (req, res) => {
   User.findOne({ uid: a.uid })
     .then((saveduser) => {
       if (saveduser) {
-        return res.status(200).json({ error: "User already exists" });
+        return res.status(409).json({ error: "User already exists" });
       }
       bcryptjs.hash(a.dob, 14).then((hashed) => {
         a.dob = hashed;
