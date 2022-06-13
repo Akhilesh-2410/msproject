@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BrowserRouter,
   Navigate,
@@ -20,9 +20,11 @@ import Landing from "./pages/Landing";
 import CreateUID from "./pages/CreateUID";
 import { PopupProvider } from "./components/PopupContext";
 import Login from "./pages/Login";
-
+import AuthProvider, { AuthContext } from "./api/AuthProvider";
 
 export const TransContext = React.createContext();
+export const formatDate = (date) =>
+  `${date.split("-")[2]}/${date.split("-")[1]}/${date.split("-")[0]}`;
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -53,10 +55,7 @@ const App = () => {
                 path="/test"
                 element={<div>{t("Welcome to React")}</div>}
               />
-              <Route
-                path="/login"
-                element={<Login/>}
-              />
+              <Route path="/login" element={<Login />} />
               <Route path="/" element={<Outlet />}>
                 <Route path="forms" element={<UserPageWrapper />}>
                   <Route

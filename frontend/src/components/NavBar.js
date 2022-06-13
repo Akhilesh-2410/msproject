@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Logo from "../assets/logo.png";
 import LogoOnly from "../assets/logo_only.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineForm } from "react-icons/ai";
 import { BsTelephone } from "react-icons/bs";
 import { Trans } from "react-i18next";
 import { TransContext } from "../App";
 import Dropdown from "./Dropdown";
+import { MdLogin, MdLogout } from "react-icons/md";
+import { AuthContext } from "../api/AuthProvider";
 
 let useClickOutside = (handler) => {
   let domNode = useRef();
@@ -32,9 +34,12 @@ const NavBar = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const { t, language, setLanguage } = useContext(TransContext);
+  const { logout } = useContext(AuthContext);
   const handleClick = () => {
     setShowOptions(!showOptions);
   };
+
+  const navigate = useNavigate();
 
   let domNode = useClickOutside(() => {
     setShowOptions(false);
@@ -125,11 +130,26 @@ const NavBar = () => {
 
         {/* </Link> */}
       </div>
-
-      <button className="font-poppins text-sm font-medium py-1 pt-3 border-b border-b-transparent hover:border-b-black transition-all duration-75 flex items-center justify-center space-x-2">
-        <BsTelephone className="w-6 h-6" />
-        <p className="hidden lg:block">Contact Us</p>
-      </button>
+      {localStorage.getItem("access_token") !== null &&
+      localStorage.getItem("role") === "user" ? (
+        <button
+          onClick={(e) => {
+            logout();
+            navigate("/login");
+          }}
+          className="font-poppins text-sm font-medium py-1 pt-3 border-b border-b-transparent hover:border-b-black transition-all duration-75 flex items-center justify-center space-x-2"
+        >
+          <MdLogout className="w-6 h-6" />
+          <p className="hidden lg:block">Logout</p>
+        </button>
+      ) : (
+        <Link to="/login">
+          <button className="font-poppins text-sm font-medium py-1 pt-3 border-b border-b-transparent hover:border-b-black transition-all duration-75 flex items-center justify-center space-x-2">
+            <MdLogin className="w-6 h-6" />
+            <p className="hidden lg:block">Login</p>
+          </button>
+        </Link>
+      )}
     </nav>
   );
 };

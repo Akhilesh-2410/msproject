@@ -1,9 +1,19 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Chat from '../pages/Chatbot';
 
 const UserPageWrapper = () => {
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (
+      localStorage.getItem("role") !== "user" ||
+      localStorage.getItem("access_token") === null
+    )
+      navigate("/login");
+  }, []);
+
   return (
     <main className="h-screen w-screen overflow-x-hidden">
       <NavBar/>

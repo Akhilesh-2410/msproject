@@ -4,6 +4,7 @@ import TextField from "../components/TextField";
 import axios from "axios";
 import { SIGNUP_URL } from "../api/APIRoutes";
 import PopupContext from "../components/PopupContext";
+import { formatDate } from "../App";
 
 const CreateUID = () => {
   const [name, setName] = useState("");
@@ -19,8 +20,6 @@ const CreateUID = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
 
-  const formatDate = (date) =>
-    `${dob.split("-")[2]}/${dob.split("-")[1]}/${dob.split("-")[0]}`;
 
   const {setPopup} = useContext(PopupContext);
 

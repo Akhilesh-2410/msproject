@@ -1,10 +1,21 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { FiDownloadCloud, FiLogOut } from "react-icons/fi";
 import { RiAdminLine, RiUser3Line } from "react-icons/ri";
 import Logo from "../assets/logo.png";
+import { AuthContext } from "../api/AuthProvider";
 
 const AdminWrapper = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (
+      localStorage.getItem("role") !== "admin" ||
+      localStorage.getItem("access_token") === null
+    ) navigate("/admin/login");
+    
+      
+  }, []);
+
   return (
     <main className="flex items-center justify-center h-screen w-screen relative overflow-hidden">
       <nav className="hidden lg:flex h-full w-[20vw] bg-clinic-700 py-6 shadow-lg lg:relative flex-col">

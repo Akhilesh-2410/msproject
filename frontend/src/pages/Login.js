@@ -6,6 +6,8 @@ import axios from "axios";
 import { ADMIN_SIGNIN_URL, SIGNIN_URL } from "../api/APIRoutes";
 import { useNavigate } from "react-router-dom";
 import PopupContext from "../components/PopupContext";
+import { formatDate } from "../App";
+import { AuthContext } from "../api/AuthProvider";
 
 const Login = () => {
   const [uid, setUid] = useState("");
@@ -14,12 +16,13 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { setPopup } = useContext(PopupContext);
+  const { setAuthState } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     axios
       .post(
         SIGNIN_URL,
-        { uid, dob },
+        { uid, dob: formatDate(dob) },
         {
           headers: {
             "Content-Type": "application/json",
@@ -27,9 +30,9 @@ const Login = () => {
         }
       )
       .then((res) => {
-        setPopup("SUCCESS", "Admin Login Successful");
-        localStorage.setItem("access_token", res.data.token);
-        navigate("/admin");
+        setPopup("SUCCESS", "Login Successful");
+        setAuthState(res.data.token, "user");
+        navigate("/");
       })
       .catch((err) => {
         setPopup("ERROR", err.response.data.error);

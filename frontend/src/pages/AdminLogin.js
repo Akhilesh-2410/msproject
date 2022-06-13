@@ -6,6 +6,7 @@ import axios from "axios";
 import { ADMIN_SIGNIN_URL } from "../api/APIRoutes";
 import { useNavigate } from "react-router-dom";
 import PopupContext from "../components/PopupContext";
+import { AuthContext } from "../api/AuthProvider";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +16,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
   const { setPopup } = useContext(PopupContext);
+  const { setAuthState } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     axios
@@ -29,7 +31,7 @@ const AdminLogin = () => {
       )
       .then((res) => {
         setPopup("SUCCESS", "Admin Login Successful");
-        localStorage.setItem("access_token", res.data.token);
+        setAuthState(res.data.token, "admin");
         navigate("/admin");
       })
       .catch((err) => {

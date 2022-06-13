@@ -984,6 +984,10 @@ video {
   background-color: rgb(31 122 140 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-clip-padding {
   background-clip: padding-box;
 }
