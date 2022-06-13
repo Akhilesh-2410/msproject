@@ -24,7 +24,7 @@ export const TransContext = React.createContext();
 const App = () => {
   const { t, i18n } = useTranslation();
 
-  const [language, setLanguage] = useState("ta");
+  const [language, setLanguage] = useState("en");
 
   useEffect(() => {
     i18n.changeLanguage(language);

@@ -49,52 +49,5 @@ const userschema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  instituteName: {
-    type: String,
-    required: true,
-  },
-  boardOfEducation: {
-    type: String,
-    required: true,
-  },
-  typeOfInstitute: {
-    type: String,
-    requird: true,
-  },
-  currentGrade: {
-    type: String,
-    required: true,
-  },
-  percent_10th: {
-    type: String,
-    required: true,
-  },
-  percent_12th: {
-    type: String,
-    required: true,
-  },
-  courseTaken: {
-    type: String,
-    requird: true,
-  },
-  cgpa: {
-    type: String,
-    required: true,
-  },
-  applied_for_assitance: {
-    type: String,
-  },
-  financical_assitance_being_received: {
-    type: String,
-  },
-  timePeriod: {
-    type: String,
-  },
-  amountReceived: {
-    type: String,
-  },
-  isRenewed: {
-    type: String,
-  },
 });
 module.exports = mongoose.model("User", userschema);

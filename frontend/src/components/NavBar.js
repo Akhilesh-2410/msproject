@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Logo from "../assets/logo.png";
+import LogoOnly from "../assets/logo_only.png";
 import { Link } from "react-router-dom";
 import { AiOutlineForm } from "react-icons/ai";
 import { BsTelephone } from "react-icons/bs";
@@ -67,7 +68,8 @@ const NavBar = () => {
 
   return (
     <nav className="h-[72px] z-50 w-screen fixed bg-white border-b-clinic-700  shadow-lg flex items-center px-6 lg:px-[calc(100vw/12)] py-1 lg:py-2 space-x-6">
-      <img src={Logo} alt="" className="h-12 lg:h-full" />
+      <img src={Logo} alt="" className="h-12 lg:h- hidden lg:block" />
+      <img src={LogoOnly} alt="" className="h-12 lg:h-full lg:hidden" />
       <div className="flex-1"></div>
       <Dropdown
         className="w-[120px]"
@@ -85,7 +87,7 @@ const NavBar = () => {
 
         <button
           onClick={handleClick}
-          className="font-poppins text-xs lg:text-sm font-medium py-1 hover:border-b transition-all duration-75 flex items-center justify-center space-x-2"
+          className="font-poppins text-xs lg:text-sm font-medium py-1 pt-3 border-b border-b-transparent hover:border-b-black transition-all duration-75 flex items-center justify-center space-x-2"
         >
           <AiOutlineForm className="w-6 h-6 aspect-square" />
           <p className="hidden lg:block"> Request for Aid</p>
@@ -124,7 +126,7 @@ const NavBar = () => {
         {/* </Link> */}
       </div>
 
-      <button className="font-poppins text-sm font-medium py-1 hover:border-b transition-all duration-75 flex items-center justify-center space-x-2">
+      <button className="font-poppins text-sm font-medium py-1 pt-3 border-b border-b-transparent hover:border-b-black transition-all duration-75 flex items-center justify-center space-x-2">
         <BsTelephone className="w-6 h-6" />
         <p className="hidden lg:block">Contact Us</p>
       </button>
