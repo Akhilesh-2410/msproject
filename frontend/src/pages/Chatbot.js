@@ -117,11 +117,13 @@ const theme = {
 	botFontColor: 'white',
 	userBubbleColor: '#0f3057',
 	userFontColor: 'white',
+	botAvatar: "bot_image.jpg",
+	
 };
 
-// Set some properties of the bot
+
 const config = {
-	botAvatar: "B",
+
 	floating: true,
 };
 
@@ -135,7 +137,6 @@ function Chat() {
 					// text for the chat bot
 
 					headerTitle="Chatbot"
-					speechSynthesis={{ enable: true, lang: 'en' }}
 					steps={steps}
 					{...config}
 

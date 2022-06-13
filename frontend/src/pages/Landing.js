@@ -123,6 +123,8 @@ const Landing = () => {
         </div>
       </div>
 
+      
+
       <div class="row-left">
         <div class="column-left">
           <div class="left-heading ">
