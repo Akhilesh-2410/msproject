@@ -15,35 +15,15 @@ const userpostschema = new mongoose.Schema({
   },
   document: [
     {
-      userid: {
-        type: String,
-        required: true,
-      },
       requirementType: {
         type: String,
-        required: true,
       },
-      status: {
-        default: "Pending",
+      name: {
         type: String,
       },
-      data: {
-        type: Object,
-        required: true,
+      url: {
+        type: String,
       },
-      document: [
-        {
-          requirementType: {
-            type: String,
-          },
-          name: {
-            type: String,
-          },
-          url: {
-            type: String,
-          },
-        },
-      ],
     },
   ],
 });
