@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const JWT_Secret="edwhfkwoddjfoiwdjfoijwdofijww";
 const requirelogin =require("./middleware.js")
 const admin=mongoose.model("Admin");
+const userpost=mongoose.model("UserPosts");
 const Vonage = require('@vonage/server-sdk')
 //JrFluWD89l_yp9NL5ROQB3tBc554-d_pPLllDnY0-twilio
 const vonage = new Vonage({
@@ -15,6 +16,14 @@ const vonage = new Vonage({
 })
 
 router.post("/approval",requirelogin,(req,res)=>{
+    userpost.findByIdAndUpdate(req.body.uid,{
+        $set:{status:req.body.status}
+    },{new:true}).exec((err,result)=>{
+        if(err)
+            return res.status(422).json({error:err})
+        else
+            res.json(result);
+    })
     const from = "St.JUDES"
     const to = req.body.phno
     const text = "Your status for "+req.body.requirementType+" has been "+req.body.status+".\nPlease contact admin for further details.\nThank you have a nice day"
