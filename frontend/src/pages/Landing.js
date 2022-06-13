@@ -38,6 +38,20 @@ const Landing = () => {
     setShowOptions(false);
   });
 
+  const [color, setColor] = useState(false);
+  const changeColor = () => {
+    console.log(window.scrollY);
+    if (window.scrollY >= 150) {
+      setColor(true);
+    } else {
+      setColor(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeColor);
+  });
+
   return (
     <React.Fragment>
       <nav className="h-[72px] z-50 w-screen fixed bg-white border-b-clinic-700  shadow-lg flex items-center px-6 lg:px-[calc(100vw/12)] py-1 lg:py-2 space-x-6">
