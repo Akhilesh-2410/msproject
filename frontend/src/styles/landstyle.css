@@ -112,7 +112,7 @@
 .heading .heading--title {
     font-family: 'Poppins', sans-serif;
     color: #222222;
-    font-size: 36px;
+    font-size: 45px;
     font-weight: 400;
     line-height: 50px;
     margin-bottom: 27px;
@@ -233,25 +233,23 @@ h3 {
     }
 }
 
-.bluequote {
-    background-color: #008891;
-}
+
 
 .bluequote .text-left {
 
     font-size: 200%;
     font-weight: 400;
     text-align: center;
-    color: #F8F8F8;
+    color: #000000;
     padding-top: 5%;
     font-family: 'Poppins', sans-serif;
 }
 
 /* Button White */
 .btn--white {
-    background-color: #ffffff;
+    background-color: #000000;
     color: #333333;
-    border: 1px solid #ffffff;
+    border: 1px solid #000000;
     border-radius: 4px;
     padding: 0.8%;
     margin: 20%;
@@ -268,9 +266,9 @@ h3 {
 .btn--white:active,
 .btn--white:focus,
 .btn--white:hover {
-    background-color: #008891;
-    color: #ffffff;
-    border-color: #008891;
+    background-color: #000000;
+    color: #000000;
+    border-color: #000000;
 }
 
 /* Button Block */
@@ -295,16 +293,16 @@ h3 {
 }
 
 .btn--bordered.btn--primary {
-    color: #008891;
-    border-color: #008891;
+    color: #000000;
+    border-color: #000000;
 }
 
 .btn--bordered.btn--primary:active,
 .btn--bordered.btn--primary:focus,
 .btn--bordered.btn--primary:hover {
     color: #ffffff;
-    background-color: #008891;
-    border-color: #008891;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .btn--bordered.btn--secondary {
@@ -321,30 +319,30 @@ h3 {
 }
 
 .btn--bordered.btn--white {
-    color: #ffffff;
-    border-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
 }
 
 .btn--bordered.btn--white:active,
 .btn--bordered.btn--white:focus,
 .btn--bordered.btn--white:hover {
-    color: #008891;
-    background-color: #ffffff;
-    border-color: #ffffff;
+    color: #000000;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .btn--white.btn--secondary {
     color: #333333;
-    border-color: #ffffff;
-    background-color: #ffffff;
+    border-color: #000000;
+    background-color: #000000;
 }
 
 .btn--white.btn--secondary:active,
 .btn--white.btn--secondary:focus,
 .btn--white.btn--secondary:hover {
     color: #ffffff;
-    background-color: #008891;
-    border-color: #008891;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 
@@ -354,16 +352,16 @@ h3 {
 }
 
 .btn--bordered.btn--primary {
-    color: #008891;
-    border-color: #008891;
+    color: #000000;
+    border-color: #000000;
 }
 
 .btn--bordered.btn--primary:active,
 .btn--bordered.btn--primary:focus,
 .btn--bordered.btn--primary:hover {
     color: #ffffff;
-    background-color: #008891;
-    border-color: #008891;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .btn--bordered.btn--secondary {
@@ -380,16 +378,16 @@ h3 {
 }
 
 .btn--bordered.btn--white {
-    color: #ffffff;
-    border-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
 }
 
 .btn--bordered.btn--white:active,
 .btn--bordered.btn--white:focus,
 .btn--bordered.btn--white:hover {
-    color: #008891;
-    background-color: #ffffff;
-    border-color: #ffffff;
+    color: #ffffff;
+    background-color: #000000;
+    border-color: #000000;
 }
 
 .blue-bar::after {
@@ -442,9 +440,10 @@ h3 {
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
     .column-left {
-        width: 100%;
+        font-size: 10px;
+        flex: 50%;
     }
 }
 
@@ -533,13 +532,15 @@ h3 {
 }
 
 
+.address{
+    background-color: #000000;
+    padding: 3%;
+}
+
 .address::after {
     content: "";
     clear: both;
     display: table;
-    margin: 50px 100px 100px 50px;
-
-
 
 }
 
@@ -555,13 +556,21 @@ h3 {
     float: left;
     width: 33.33%;
     align-items: center;
-    padding: 5%;
+    background-color: #000000;
 }
 
 
+
+.footer-panel {
+    float: right;
+    align-items: center;
+    background-color: #000000;
+
+}
+
 .address-title {
     font-family: 'Poppins', sans-serif;
-    color: #222222;
+    color: #b4b4b4;
     font-size: 30px;
     font-weight: 400;
     text-transform: capitalize;
@@ -569,22 +578,59 @@ h3 {
     text-align: center;
 }
 
+.address--content
+{
+    color: #999999;
+    text-align: center;
+    padding: 2%;
+}
 
 
 .column-widget a {
     float: right;
     text-align: center;
     transition: all 0.3s ease;
-    color: white;
     font-size: 36px;
     width: 30px;
     height: 30px;
     margin-top: 20px;
     margin-right: 35px;
+    
 
 
 }
 
+.filter {
+    filter: brightness(0) invert(1);
+    
+}
+
+.column-widget 
+{
+    background-color: #000000;
+}
+
+.footer-bar
+{
+    background-color: #000000;
+    width: 100%;
+
+    float: left;
+    position: relative;
+    
+    
+}
+
+
+.footer--icon
+{
+    width: 50%;
+    height: 50%;
+    display:flex;
+flex-direction: flex-end;
+
+  
+}
 
 
 /*---------------*/

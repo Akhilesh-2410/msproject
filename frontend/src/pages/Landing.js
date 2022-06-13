@@ -1,121 +1,21 @@
-import NavBar from "../components/NavBar";
 import "../styles/landstyle.css";
-import React, { useState, useEffect, useRef } from "react";
-import Logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-import { AiOutlineForm } from "react-icons/ai";
-import {BsTelephone} from "react-icons/bs"
-
-
-let useClickOutside = (handler) => {
-  let domNode = useRef();
-
-  useEffect(() => {
-    let maybeHandler = (event) => {
-      if (!domNode.current.contains(event.target)) {
-        handler();
-      }
-    };
-
-    document.addEventListener("mousedown", maybeHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", maybeHandler);
-    };
-  });
-
-  return domNode;
-};
+import React from "react";
 
 const Landing = () => {
-  const [showOptions, setShowOptions] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const handleClick = () => {
-    setShowOptions(!showOptions);
-  };
-
-  let domNode = useClickOutside(() => {
-    setShowOptions(false);
-  });
-
-  const [color, setColor] = useState(false);
-  const changeColor = () => {
-    console.log(window.scrollY);
-    if (window.scrollY >= 150) {
-      setColor(true);
-    } else {
-      setColor(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeColor);
-  });
 
   return (
     <React.Fragment>
-      <nav className="h-[72px] z-50 w-screen fixed bg-white border-b-clinic-700  shadow-lg flex items-center px-6 lg:px-[calc(100vw/12)] py-1 lg:py-2 space-x-6">
-      <img src={Logo} alt="" className="h-12 lg:h-full" />
-      <div className="flex-1"></div>
-      <div ref={domNode}>
-        {/* <Link to="/forms/request-aid"> */}
 
-        <button
-          onClick={handleClick}
-          className="font-poppins text-xs lg:text-sm font-medium py-1 hover:border-b transition-all duration-75 flex items-center justify-center space-x-2"
-        >
-          <AiOutlineForm className="w-6 h-6 aspect-square" />
-          <p className="hidden lg:block"> Request for Aid</p>
-        </button>
-        {showOptions && (
-          <div
-            class="text-base z-50 origin-top-right absolute z-index: 1 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-            tabindex="-1"
-          >
-            <div class="py-1" role="none">
-              <a
-                href="/forms/request-aid/financial"
-                class="text-gray-700 block px-4 py-2 text-sm "
-                role="menuitem"
-                tabindex="-1"
-                id="menu-item-0"
-              >
-                Financial
-              </a>
-              <a
-                href="/forms/request-aid/non-financial"
-                class="text-gray-700 block px-4 py-2 text-sm "
-                role="menuitem"
-                tabindex="-1"
-                id="menu-item-1"
-              >
-                Non Financial
-              </a>
-            </div>
-          </div>
-        )}
-
-        {/* </Link> */}
-      </div>
-      
-      <button className="font-poppins text-sm font-medium py-1 hover:border-b transition-all duration-75 flex items-center justify-center space-x-2">
-        <BsTelephone className="w-6 h-6"/>
-        <p className="hidden lg:block">Contact Us</p>
-      </button>
-    </nav>
 
       <div className="box">
         <div className="top-Heading">We are building your future!</div>
         <div
-        class="head-bar"
-        role="progressbar"
-        aria-valuenow="60"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      ></div>
+          class="head-bar"
+          role="progressbar"
+          aria-valuenow="60"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
         <div className="top-subtitle">
           Once a St. Judes child is always a St. Judes child
         </div>
@@ -203,7 +103,7 @@ const Landing = () => {
         <div class='middle-card'>
           <div class='card'>
             <div class='image'>
-            <a href="/forms/request-aid/financial"><img src="https://media.istockphoto.com/photos/man-and-woman-hand-consider-on-calculator-picture-id1164273151?b=1&k=20&m=1164273151&s=170667a&w=0&h=dnoEq_4xbRFiZruIDbk3HOJUVdGbhraM3eAIsntmyOE=" /></a>
+              <a href="/forms/request-aid/financial"><img src="https://media.istockphoto.com/photos/man-and-woman-hand-consider-on-calculator-picture-id1164273151?b=1&k=20&m=1164273151&s=170667a&w=0&h=dnoEq_4xbRFiZruIDbk3HOJUVdGbhraM3eAIsntmyOE=" /></a>
             </div>
             <div class='content'>
               <p>St. Jude's for Life (SJFL) will support those children who recovered from cancer, as needed.</p>
@@ -213,7 +113,7 @@ const Landing = () => {
         <div class='middle-card'>
           <div class='card'>
             <div class='image'>
-            <a href="/forms/request-aid/monthly-update"><img src="https://media.istockphoto.com/photos/child-psychologist-talks-with-young-boy-and-his-mom-picture-id1356661528?b=1&k=20&m=1356661528&s=170667a&w=0&h=LcZiP0ySz6453-l1-7whBT7kq6o9aHvGVgZS2mG2NI4=" /></a>
+              <a href="/forms/request-aid/monthly-update"><img src="https://media.istockphoto.com/photos/child-psychologist-talks-with-young-boy-and-his-mom-picture-id1356661528?b=1&k=20&m=1356661528&s=170667a&w=0&h=LcZiP0ySz6453-l1-7whBT7kq6o9aHvGVgZS2mG2NI4=" /></a>
             </div>
             <div class='content'>
               <p>We monitor the health of every child on a monthly basis to ensure they are in good health</p>
@@ -223,7 +123,7 @@ const Landing = () => {
         <div class='middle-card'>
           <div class='card'>
             <div class='image'>
-            <a href="/forms/request-aid/non-financial"><img src="https://media.istockphoto.com/photos/portrait-of-smiling-black-doctor-making-check-up-for-infant-baby-boy-picture-id1331252840?k=20&m=1331252840&s=612x612&w=0&h=H99rJqhXrPn6S7Xf0H0yg39PvDmt-YGKxjYHzXTyWKc=" /></a>
+              <a href="/forms/request-aid/non-financial"><img src="https://media.istockphoto.com/photos/portrait-of-smiling-black-doctor-making-check-up-for-infant-baby-boy-picture-id1331252840?k=20&m=1331252840&s=612x612&w=0&h=H99rJqhXrPn6S7Xf0H0yg39PvDmt-YGKxjYHzXTyWKc=" /></a>
             </div>
             <div class='content'>
               <p>We provide counseling support for children who need it to ensure their physical and mental health, ultimately leading to a full, healthy, and happy life.</p>
@@ -259,7 +159,7 @@ const Landing = () => {
           <div class="container">
             <div class="box">
               <div class="imgBox">
-                <a href="/forms/request-aid/financial"><img src="https://img.freepik.com/free-photo/cutout-paper-chain-family-with-protection-cupped-hands-concept-security-care-hands-with-cut-out-paper-silhouette-table-family-care-concept_494741-46837.jpg?w=826" alt="" /></a>
+                <a href="/forms/request-aid/financial"><img src="https://media.istockphoto.com/photos/happy-young-family-picture-id1316638351?b=1&k=20&m=1316638351&s=170667a&w=0&h=eICVP7qZCS2CQ7uhynA22BqVtPJ3dMKiONjrFVJYC2g=" alt="" /></a>
               </div>
               <div class="port-text">
                 <h2>We are Family Foundation</h2>
@@ -267,7 +167,7 @@ const Landing = () => {
             </div>
             <div class="box">
               <div class="imgBox">
-                <a href="/forms/request-aid/monthly-update"><img src="https://img.freepik.com/free-photo/i-show-you-how-it-work_329181-7679.jpg?t=st=1655059720~exp=1655060320~hmac=ea0f565579061906dcd374259e051522eef27caea0b2406a1345e915f4ed2714&w=826" alt="" /></a>
+                <a href="/forms/request-aid/monthly-update"><img src="https://images.unsplash.com/photo-1530031665520-57dab9ab1ec9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2hpbGQlMjBjYXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="" /></a>
               </div>
               <div class="port-text">
                 <h2>Your Child at our Care</h2>
@@ -275,31 +175,13 @@ const Landing = () => {
             </div>
             <div class="box">
               <div class="imgBox">
-                <a href="/forms/request-aid/non-financial"><img src="https://img.freepik.com/free-photo/she-always-explain-difficult-homework_329181-10517.jpg?t=st=1655059849~exp=1655060449~hmac=d8af5f42cd5507ac246bdd6e2089a47fdd6e7c6d22e7ecc350fa9d63f5cb5c0d&w=826" alt="" /></a>
+                <a href="/forms/request-aid/non-financial"><img src="https://media.istockphoto.com/photos/children-and-parent-holding-hands-and-playing-together-with-unity-and-picture-id966783104?b=1&k=20&m=966783104&s=170667a&w=0&h=esH_6NTwUmOIvWt8mwEnLE0NCDGbuZOG5JkJebmJPEY=" alt="" /></a>
               </div>
               <div class="port-text">
                 <h2>Unconditional love and support</h2>
               </div>
             </div>
           </div>
-          {/* <div class="column">
-            <img
-              src="https://img.freepik.com/free-photo/cutout-paper-chain-family-with-protection-cupped-hands-concept-security-care-hands-with-cut-out-paper-silhouette-table-family-care-concept_494741-46837.jpg?w=826"
-              alt="Snow"
-            />
-          </div>
-          <div class="column">
-            <img
-              src="https://img.freepik.com/free-photo/i-show-you-how-it-work_329181-7679.jpg?t=st=1655059720~exp=1655060320~hmac=ea0f565579061906dcd374259e051522eef27caea0b2406a1345e915f4ed2714&w=826"
-              alt="Forest"
-            />
-          </div>
-          <div class="column">
-            <img
-              src="https://img.freepik.com/free-photo/she-always-explain-difficult-homework_329181-10517.jpg?t=st=1655059849~exp=1655060449~hmac=d8af5f42cd5507ac246bdd6e2089a47fdd6e7c6d22e7ecc350fa9d63f5cb5c0d&w=826"
-              alt="Mountains"
-            />
-          </div> */}
         </div>
       </div>
 
@@ -425,23 +307,25 @@ const Landing = () => {
                 Our “home away from home” is a hygienic, protective, nurturing environment which gives the children the best chance of beating cancer.
               </div>
             </div>
-           
+
           </div>
           <div class="pull-right text-center">
-              <a class="btn btn--white btn--bordered btn--rounded" href="#">
-                Get Started
-              </a>
-            </div>
+            <a class="btn btn--white btn--bordered btn--rounded" href="#">
+              Get Started
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="Address">
+
+
+      <div class="address">
         <div class="feature col-xs-12 col-sm-6 col-md-3">
           <div class="address-panel">
             <div class="feature--icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/447/447031.png" />
+              <a href="/forms/request-aid/financial"><img src="https://cdn-icons-png.flaticon.com/512/447/447031.png" class="filter" /></a>
             </div>
-            <div class="feature--content">
+            <div class="address--content">
               <div className="address-title">Address</div>
               <p>
                 St. Jude India ChildCare Centres Cotton Green Campus, Ground
@@ -455,11 +339,12 @@ const Landing = () => {
         <div class=" feature col-xs-12 col-sm-6 col-md-3">
           <div class="address-panel">
             <div class="feature--icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" />
+              <a href="/forms/request-aid/monthly-update"><img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" class="filter" /></a>
             </div>
-            <div class="feature--content">
+            <div class="address--content">
               <div className="address-title">Phone</div>
-              <p>022-66663152 </p>
+              <p>
+                022-66663152 </p>
             </div>
           </div>
         </div>
@@ -467,35 +352,63 @@ const Landing = () => {
         <div class="feature col-xs-12 col-sm-6 col-md-3">
           <div class="address-panel">
             <div class="feature--icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/95/95645.png" />
+              <a href="/forms/request-aid/non-financial"><img src="https://cdn-icons-png.flaticon.com/512/95/95645.png" class="filter" /></a>
             </div>
-            <div class="feature--content">
+            <div class="address--content">
               <div className="address-title">Email</div>
-              <p>contact@stjudechild.org </p>
+              <p>
+                contact@stjudechild.org
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="footer">
-        <div class="column-widget">
-          <a class="facebook" href="https://www.facebook.com/StJudeIndia">
-            <img src="https://img.icons8.com/ios-filled/50/undefined/facebook-new.png" />
-          </a>
-          <a class="twitter" href="https://twitter.com/StJudeChildCare">
-            <img src="https://img.icons8.com/ios-filled/50/undefined/twitter.png" />
-          </a>
-          <a class="linkedin" href="https://www.linkedin.com/company/st--jude-india">
-            <img src="https://img.icons8.com/glyph-neue/64/undefined/linkedin-circled.png" />
-          </a>
-          <a class="instagram" href="https://www.instagram.com/stjudeindia/">
-            <img src="https://img.icons8.com/ios-filled/50/undefined/instagram-new--v1.png" />
-          </a>
-          <a class="youtube" href="https://www.youtube.com/user/StJudechildcare">
-            <img src="https://img.icons8.com/ios-filled/50/undefined/youtube-play.png" />
-          </a>
+
+      <div class="footer-bar">
+        <div class="feature col-xs-12 col-sm-6 col-md-3">
+          <div class="footer-panel">
+            <div class="footer--icon">
+              <a href="/forms/request-aid/financial"><img src="https://img.icons8.com/ios-filled/50/undefined/facebook-new.png" class="filter" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class=" feature col-xs-12 col-sm-6 col-md-3">
+          <div class="footer-panel">
+            <div class="footer--icon">
+              <a href="/forms/request-aid/monthly-update"><img src="https://img.icons8.com/ios-filled/50/undefined/twitter.png" class="filter" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature col-xs-12 col-sm-6 col-md-3">
+          <div class="footer-panel">
+            <div class="footer--icon">
+              <a href="/forms/request-aid/non-financial"><img src="https://img.icons8.com/glyph-neue/64/undefined/linkedin-circled.png" class="filter" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature col-xs-12 col-sm-6 col-md-3">
+          <div class="footer-panel">
+            <div class="footer--icon">
+              <a href="/forms/request-aid/non-financial"><img src="https://img.icons8.com/ios-filled/50/undefined/instagram-new--v1.png" class="filter" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature col-xs-12 col-sm-6 col-md-3">
+          <div class="footer-panel">
+            <div class="footer--icon">
+              <a href="/forms/request-aid/non-financial"><img src="https://img.icons8.com/ios-filled/50/undefined/youtube-play.png" class="filter" /></a>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
     </React.Fragment>
   );
 };
