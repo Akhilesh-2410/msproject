@@ -15,35 +15,36 @@ const userpostschema = new mongoose.Schema({
   },
   document: [
     {
-        userid:{
-            type:String,
-            required:true
+      userid: {
+        type: String,
+        required: true,
+      },
+      requirementType: {
+        type: String,
+        required: true,
+      },
+      status: {
+        default: "Pending",
+        type: String,
+      },
+      data: {
+        type: Object,
+        required: true,
+      },
+      document: [
+        {
+          requirementType: {
+            type: String,
+          },
+          name: {
+            type: String,
+          },
+          url: {
+            type: String,
+          },
         },
-        requirementType:{
-            type:String,
-            required:true
-        },
-        status:{
-            default:"Pending",
-            type:String,
-        },
-        data:{
-            type:Object,
-            required:true
-        },
-        document:[
-            {
-                requirementType:{
-                    type:String
-                },
-                name:{
-                    type:String
-                },
-                url:{
-                    type:String
-                    }
-            }
-        ]
-    }
-  })
-module.exports=mongoose.model("UserPosts",userpostschema);
+      ],
+    },
+  ],
+});
+module.exports = mongoose.model("UserPosts", userpostschema);
