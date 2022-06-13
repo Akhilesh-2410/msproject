@@ -1,29 +1,21 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const User = mongoose.model("User");
-const bcryptjs = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const JWT_Secret = "edwhfkwoddjfoiwdjfoijwdofijww";
-const requirelogin = require("./middleware.js");
-const admin = mongoose.model("Admin");
-const Vonage = require("@vonage/server-sdk");
+const express = require('express');
+const router=express.Router();
+const mongoose = require('mongoose');
+const User=mongoose.model("User");
+const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+const JWT_Secret="edwhfkwoddjfoiwdjfoijwdofijww";
+const requirelogin =require("./middleware.js")
+const admin=mongoose.model("Admin");
+const userpost=mongoose.model("UserPosts");
+const Vonage = require('@vonage/server-sdk')
 //JrFluWD89l_yp9NL5ROQB3tBc554-d_pPLllDnY0-twilio
 const vonage = new Vonage({
   apiKey: "73cff7e5",
   apiSecret: "Ph9VNPGCIV112JKI",
 });
 
-router.post("/approval", requirelogin, (req, res) => {
-  const from = "St.JUDES";
-  const to = req.body.phno;
-  const text =
-    "Your status for " +
-    req.body.requirementType +
-    " has been " +
-    req.body.status +
-    ".\nPlease contact admin for further details.\nThank you have a nice day";
-  vonage.message.sendSms(from, to, text, (err, responseData) => {
+    vonage.message.sendSms(from, to, text, (err, responseData) => {
     if (err) {
       console.log(err);
     } else {
@@ -36,7 +28,6 @@ router.post("/approval", requirelogin, (req, res) => {
       }
     }
   });
-});
 
 router.get("/protected", requirelogin, (req, res) => {
   res.send("HELLO boiiii");
