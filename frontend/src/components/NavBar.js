@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { AiOutlineForm } from "react-icons/ai";
-import {BsTelephone} from "react-icons/bs"
-
+import { BsTelephone } from "react-icons/bs";
+import { Trans } from "react-i18next";
+import { TransContext } from "../App";
+import Dropdown from "./Dropdown";
 
 let useClickOutside = (handler) => {
   let domNode = useRef();
@@ -28,6 +30,7 @@ let useClickOutside = (handler) => {
 const NavBar = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const { t, language, setLanguage } = useContext(TransContext);
   const handleClick = () => {
     setShowOptions(!showOptions);
   };
@@ -36,10 +39,47 @@ const NavBar = () => {
     setShowOptions(false);
   });
 
+  const getCodeFromLang = (lang) => {
+    switch (lang) {
+      case "English":
+        return "en";
+      case "தமிழ்":
+        return "ta";
+      case "हिन्दी":
+        return "hi";
+      default:
+        return "en";
+    }
+  };
+
+  const getLangFromCode = (code) => {
+    switch (code) {
+      case "en":
+        return "English";
+      case "ta":
+        return "தமிழ்";
+      case "hi":
+        return "हिन्दी";
+      default:
+        return "English";
+    }
+  };
+
   return (
     <nav className="h-[72px] z-50 w-screen fixed bg-white border-b-clinic-700  shadow-lg flex items-center px-6 lg:px-[calc(100vw/12)] py-1 lg:py-2 space-x-6">
       <img src={Logo} alt="" className="h-12 lg:h-full" />
       <div className="flex-1"></div>
+      <Dropdown
+        className="w-[120px]"
+        options={["English", "தமிழ்", "हिन्दी"]}
+        valueState={[
+          getLangFromCode(language),
+          (l) => {
+            console.log(getCodeFromLang(l));
+            setLanguage(getCodeFromLang(l));
+          },
+        ]}
+      />
       <div ref={domNode}>
         {/* <Link to="/forms/request-aid"> */}
 
@@ -52,40 +92,40 @@ const NavBar = () => {
         </button>
         {showOptions && (
           <div
-            class="text-base z-50 origin-top-right absolute z-index: 1 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="text-base z-50 origin-top-left absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
             tabindex="-1"
           >
             <div class="py-1" role="none">
-              <a
-                href="/forms/request-aid/financial"
-                class="text-gray-700 block px-4 py-2 text-sm "
+              <Link
+                to="/forms/request-aid/financial"
+                class="text-gray-700 block px-4 py-2 text-sm hover:bg-[rgba(200,200,200)] "
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-0"
               >
                 Financial
-              </a>
-              <a
-                href="/forms/request-aid/non-financial"
-                class="text-gray-700 block px-4 py-2 text-sm "
+              </Link>
+              <Link
+                to="/forms/request-aid/non-financial"
+                class="text-gray-700 block px-4 py-2 text-sm hover:bg-[rgba(200,200,200)]"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-1"
               >
                 Non Financial
-              </a>
+              </Link>
             </div>
           </div>
         )}
 
         {/* </Link> */}
       </div>
-      
+
       <button className="font-poppins text-sm font-medium py-1 hover:border-b transition-all duration-75 flex items-center justify-center space-x-2">
-        <BsTelephone className="w-6 h-6"/>
+        <BsTelephone className="w-6 h-6" />
         <p className="hidden lg:block">Contact Us</p>
       </button>
     </nav>

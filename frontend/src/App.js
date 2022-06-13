@@ -23,11 +23,11 @@ export const TransContext = React.createContext();
 const App = () => {
   const { t, i18n } = useTranslation();
 
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("ta");
 
   useEffect(() => {
     i18n.changeLanguage(language);
-  }, []);
+  }, [language]);
 
   return (
     <TransContext.Provider value={{ t, language, setLanguage }}>

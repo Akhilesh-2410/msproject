@@ -33,9 +33,11 @@ const resources = {
       "10th Percent.": "10th Percent.",
       "12th Percent.": "12th Percent.",
       "If College, Course taken": "If College, Course taken",
-      "If College, CGA (last SEM)": "If College, CGA (last SEM)",
+      "Name of Course": "Name of Course",
+      "If College, CGPA (last SEM)": "If College, CGPA (last SEM)",
       // Scholarship/ Financial Assistance received already
-      "Applied for any assistance": "Applied for any assistance",
+      "Applied for any assistance previously?":
+        "Applied for any assistance previously?",
       "Financial Assistance being received":
         "Financial Assistance being received",
       "Assisted for Period of": "Assisted for Period of",
@@ -44,6 +46,8 @@ const resources = {
       // Assistance required
       "Required for Period of": "Required for Period of",
       "Total Amount required (per year)": "Total Amount required (per year)",
+      "Purpose of Aid": "Purpose of Aid",
+      "Enter if any help to be done": "Enter if any help to be done",
     },
   },
   ta: {
@@ -80,9 +84,10 @@ const resources = {
       "10th Percent.": "10th மதிப்பெண்(சதவீதம்)",
       "12th Percent.": "12th மதிப்பெண்(சதவீதம்)",
       "If College, Course taken": "கல்லூரியில் எடுத்த படிப்பு",
-      "If College, CGA (last SEM)": "கல்லூரியில் CGPA",
+      "Name of Course": "கல்விப் பாடத்தின் பெயர்",
+      "If College, CGPA (last SEM)": "கல்லூரியில் CGPA",
       // Scholarship/ Financial Assistance received already
-      "Applied for any assistance":
+      "Applied for any assistance previously?":
         "இதற்கு முன்பு உதவிக்கு விண்ணப்பித்திருக்கிறீர்களா?",
       "Financial Assistance being received": "பெறப்பட்ட நிதி உதவி",
       "Assisted for Period of": "உதவி காலம்",
@@ -91,6 +96,9 @@ const resources = {
       // Assistance required
       "Required for Period of": "தேவையான காலம்",
       "Total Amount required (per year)": "மொத்த தொகை (ஆண்டுக்கு)",
+      "Purpose of Aid": "உதவியின் நோக்கம்",
+      "Enter if any help to be done":
+        "ஏதேனும் உதவி செய்ய வேண்டுமா என உள்ளிடவும்",
     },
   },
   hi: {
@@ -127,9 +135,11 @@ const resources = {
       "10th Percent.": "10th Percent.",
       "12th Percent.": "12th Percent.",
       "If College, Course taken": "If College, Course taken",
-      "If College, CGA (last SEM)": "If College, CGA (last SEM)",
+      "Name of Course": "Name of Course",
+      "If College, CGPA (last SEM)": "If College, CGA (last SEM)",
       // Scholarship/ Financial Assistance received already
-      "Applied for any assistance": "Applied for any assistance",
+      "Applied for any assistance previously?":
+        "Applied for any assistance previously?",
       "Financial Assistance being received":
         "Financial Assistance being received",
       "Assisted for Period of": "Assisted for Period of",
@@ -138,6 +148,8 @@ const resources = {
       // Assistance required
       "Required for Period of": "Required for Period of",
       "Total Amount required (per year)": "Total Amount required (per year)",
+      "Purpose of Aid": "Purpose of Aid",
+      "Enter if any help to be done": "Enter if any help to be done",
     },
   },
 };
