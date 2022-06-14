@@ -17,12 +17,12 @@ const vonage = new Vonage({
 
 router.post("/approval", requirelogin, (req, res) => {
   userpost
-    .findOne(
-      { uid: req.body.uid }
-      // {
-      //   $set: { status: req.body.status },
-      // },
-      // { new: true }
+    .findOneAndUpdate(
+      { uid: req.body.uid },
+      {
+        $set: { status: req.body.status },
+      },
+      { new: true }
     )
     .exec((err, result) => {
       if (err) return res.status(422).json({ error: err });

@@ -10,7 +10,7 @@ const userpostschema = new mongoose.Schema({
     required: true,
   },
   status:{
-            default:"Pending",
+            default:"pending",
             type:String,
         },
   data: {

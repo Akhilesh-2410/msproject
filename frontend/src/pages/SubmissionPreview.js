@@ -1,9 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { GET_POST_URL, GET_USER_DETAIL_URL } from "../api/APIRoutes";
+import {
+  APPROVAL_URL,
+  GET_POST_URL,
+  GET_USER_DETAIL_URL,
+} from "../api/APIRoutes";
 import TextOutput from "../components/TextOutput";
 import { GrDocumentImage, GrDocumentPdf } from "react-icons/gr";
+import PopupContext from "../components/PopupContext";
 
 const SubmissionPreview = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +18,10 @@ const SubmissionPreview = () => {
   const [userDetails, setUserDetails] = useState({});
   const [requestDetails, setRequestDetails] = useState({});
   const [documentDetails, setDocumentDetails] = useState([]);
+
+  const { setPopup } = useContext(PopupContext);
+
+  const [status, setStatus] = useState("pending");
 
   useEffect(() => {
     // console.log(searchParams.get("uid"));
@@ -42,9 +51,10 @@ const SubmissionPreview = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        console.log("REQUEST_DATA", res.data);
         setRequestDetails(res.data.data);
         setDocumentDetails(res.data.document);
+        setStatus(res.data.status);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -53,10 +63,31 @@ const SubmissionPreview = () => {
     console.log(userDetails);
     console.log(requestDetails);
     console.log(documentDetails);
-  }, [userDetails, requestDetails, documentDetails]);
+    console.log(status);
+  }, [userDetails, requestDetails, documentDetails, status]);
 
-  const handleApproval = (e) => {
+  const handleApproval = (e, STATUS) => {
     e.preventDefault();
+    axios
+      .post(
+        APPROVAL_URL,
+        {
+          uid: localStorage.getItem("uid"),
+          phno: "919659604838",
+          status: STATUS,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        setPopup("SUCCESS", "Approved Succesfully");
+        console.log("APPROVED", res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -69,14 +100,32 @@ const SubmissionPreview = () => {
             {type === 3 && "Monthly update"}
           </h1>
           <div className="flex-1"></div>
-          <div className="flex w-full lg:w-fit h-fit space-x-2 z-30">
-            <button className="border-green rounded-md border-2 px-4 py-1 shadow-lg">
-              <div className="font-semibold text-green">Approve</div>
-            </button>
-            <button className="border-red rounded-md border-2 px-4 py-1 shadow-lg">
-              <div className="font-semibold text-red">Reject</div>
-            </button>
-          </div>
+          {status !== "approved" && status !== "rejected" && (
+            <div className="flex w-full lg:w-fit h-fit space-x-2 z-30">
+              <button
+                className="border-green rounded-md border-2 px-4 py-1 shadow-lg"
+                onClick={(e) => handleApproval(e, "approved")}
+              >
+                <div className="font-semibold text-green">Approve</div>
+              </button>
+              <button
+                className="border-red rounded-md border-2 px-4 py-1 shadow-lg"
+                onClick={(e) => handleApproval(e, "rejected")}
+              >
+                <div className="font-semibold text-red">Reject</div>
+              </button>
+            </div>
+          )}
+          {status === "approved" && (
+            <p className="text-green text-lg flex w-full lg:w-fit h-fit space-x-2 z-30">
+              Approved!
+            </p>
+          )}
+          {status === "rejected" && (
+            <p className="text-red text-lg flex w-full lg:w-fit h-fit space-x-2 z-30">
+              Rejected :(
+            </p>
+          )}
         </div>
       </nav>
       <main className="p-6 lg:p-8 w-full space-y-6 my-32 lg:my-24">

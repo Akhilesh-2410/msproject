@@ -156,6 +156,31 @@ const RequestForAid = ({ db }) => {
       setAssist("--");
     }
     if (AnyHelp.length <= 0) setAnyHelp("--");
+
+    let dataBody = {
+      nameOfInstitute: nameOfInstitute,
+      boardOfEducation: boardOfEdu,
+      typeOfInstitute: TypeOfEdu,
+      currentGrade: Grade,
+      percentage10: PercentageTen,
+      percentage12: PercentageTwel,
+      course: Course,
+      cgpa: Cgpa,
+      ifAssistance: Help,
+      assistanceName: Assist,
+      assistanceAmount: Amount,
+      assistanceRenew: Renew,
+      assistanceFrom: FinFrom,
+      assistanceTo: FinTo,
+      aidFrom: AidFrom,
+      aidTo: AidTo,
+      aidAmount: GetAmount,
+      purposeOfAid: Purpose,
+      anyHelp: AnyHelp,
+    };
+
+    console.log(dataBody);
+
     if (
       true &&
       (nameOfInstitute.length <= 0 ||
@@ -179,27 +204,7 @@ const RequestForAid = ({ db }) => {
     ) {
       alert("Please fill all the fields");
     } else {
-      let dataBody = {
-        nameOfInstitute: nameOfInstitute,
-        boardOfEducation: boardOfEdu,
-        typeOfInstitute: TypeOfEdu,
-        currentGrade: Grade,
-        percentage10: PercentageTen,
-        percentage12: PercentageTwel,
-        course: Course,
-        cgpa: Cgpa,
-        ifAssistance: Help,
-        assistanceName: Assist,
-        assistanceAmount: Amount,
-        assistanceRenew: Renew,
-        assistanceFrom: FinFrom,
-        assistanceTo: FinTo,
-        aidFrom: AidFrom,
-        aidTo: AidTo,
-        aidAmount: GetAmount,
-        purposeOfAid: Purpose,
-        anyHelp: AnyHelp,
-      };
+      
 
       uploadDocuments(documents)
         .then((res) => {
@@ -223,6 +228,25 @@ const RequestForAid = ({ db }) => {
               }
             )
             .then((response) => {
+              DB.formData.put({ id: "nameOfInstitute", value: "" });
+              DB.formData.put({ id: "boardOfEducation", value: "" });
+              DB.formData.put({ id: "typeOfInstitute", value: "" });
+              DB.formData.put({ id: "currentGrade", value: "" });
+              DB.formData.put({ id: "percentage10", value: "" });
+              DB.formData.put({ id: "percentage12", value: "" });
+              DB.formData.put({ id: "course", value: "" });
+              DB.formData.put({ id: "cgpa", value: "" });
+              DB.formData.put({ id: "ifAssistance", value: "" });
+              DB.formData.put({ id: "assistanceName", value: "" });
+              DB.formData.put({ id: "assistanceAmount", value: "" });
+              DB.formData.put({ id: "assistanceRenew", value: "" });
+              DB.formData.put({ id: "assistanceFrom", value: "" });
+              DB.formData.put({ id: "assistanceTo", value: "" });
+              DB.formData.put({ id: "aidFrom", value: "" });
+              DB.formData.put({ id: "aidTo", value: "" });
+              DB.formData.put({ id: "aidAmount", value: "" });
+              DB.formData.put({ id: "purposeOfAid", value: "" });
+              DB.formData.put({ id: "anyHelp", value: "" });
               console.log(response);
               setPopup("SUCCESS", "Request sent successfully.");
               navigate("/forms/request-aid/success");
@@ -289,8 +313,8 @@ const RequestForAid = ({ db }) => {
                 options={["CBSE", "State Board", "ICSE"]}
                 className="w-full"
                 placeholder={t("Board of Education")}
-                valueState={[boardOfEdu, setBoardOfEdu]} 
-                id="boardOfEducation" 
+                valueState={[boardOfEdu, setBoardOfEdu]}
+                id="boardOfEducation"
               />
               <Dropdown
                 options={["Private", "Public"]}

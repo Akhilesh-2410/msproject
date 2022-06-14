@@ -54,7 +54,7 @@ const Submissions = () => {
             key={x._id}
             name={x.userid}
             type={parseInt(x.requirementType)}
-            uid={x.userid}
+            uid={x.status}
           />
         ))}
       </section>
@@ -82,9 +82,17 @@ export const SubmissionCard = ({ name, type, uid }) => {
             <AiOutlineCalendar className="text-clinic-500" />
             <p className="text-xs text-clinic-500">{date}</p>
           </div> */}
-          <div className="flex items-center justify-center space-x-1">
-            <p className="text-xs text-clinic-500">UID : </p>
-            <p className="text-xs text-clinic-500">{uid}</p>
+          <div className="flex flex-col items-start justify-center">
+            <p className="text-xs text-clinic-500">Status</p>
+            {uid === "approved" && (
+              <p className="text-base text-green">{"Approved !"}</p>
+            )}
+            {uid === "rejected" && (
+              <p className="text-base text-red">{"Rejected."}</p>
+            )}
+            {uid === "pending" && (
+              <p className="text-base text-clinic-500">{"Unread"}</p>
+            )}
           </div>
         </div>
         <Link to={`/admin/submissions/preview?uid=${uid}&type=${type}`}>

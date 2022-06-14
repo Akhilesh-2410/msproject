@@ -8,3 +8,4 @@ export const GET_ALL_POST_URL = `${BASE_URL}/getAllPost`;
 export const GET_POST_URL = `${BASE_URL}/getPost`;
 export const POST_DOC_URL = `${BASE_URL}/postdoc`;
 export const GET_USER_DETAIL_URL = `${BASE_URL}/userDetails`;
+export const APPROVAL_URL = `${BASE_URL}/approval`;
