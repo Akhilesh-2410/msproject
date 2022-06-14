@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { DB } from "../App";
 
 const TextArea = ({
   className = "w-full",
   label = "Here",
   inputState = [null, () => {}],
+  id=""
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = inputState;
@@ -30,6 +32,7 @@ const TextArea = ({
           }
         }}
         onChange={(e) => {
+          if (id.length > 0) DB.formData.put({ id, value: e.target.value });
           setValue(e.target.value);
           if (e.target.value.length <= 0) {
             setIsFocused(false);

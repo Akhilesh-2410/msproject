@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TextArea from "../components/TextArea";
 import TextField from "../components/TextField";
 import Button from "../components/Button";
@@ -9,8 +9,9 @@ import axios from "axios";
 import { POST_DOC_URL, UPLOAD_URL } from "../api/APIRoutes";
 import { useNavigate } from "react-router-dom";
 import PopupContext from "../components/PopupContext";
+import { DB } from "../App";
 
-const RequestForAid = () => {
+const RequestForAid = ({ db }) => {
   const options = ["No", "Yes"];
   const grade = [
     "Post Graduate",
@@ -19,6 +20,100 @@ const RequestForAid = () => {
     "Secondary",
     "Primary Education",
   ];
+  useEffect(
+    () => {
+      // create the store
+      DB.version(1).stores({ formData: "id,value" });
+
+      // perform a read/write transatiction on the new store
+      DB.transaction("rw", DB.formData, async () => {
+        // get the first and last name from the data
+        const dbnameOfInstitute = await DB.formData.get("nameOfInstitute");
+        const dbboardOfEducation = await DB.formData.get("boardOfEducation");
+        const dbtypeOfInstitute = await DB.formData.get("typeOfInstitute");
+        const dbcurrentGrade = await DB.formData.get("currentGrade");
+        const dbpercentage10 = await DB.formData.get("percentage10");
+        const dbpercentage12 = await DB.formData.get("percentage12");
+        const dbcourse = await DB.formData.get("course");
+        const dbcgpa = await DB.formData.get("cgpa");
+        const dbifAssistance = await DB.formData.get("ifAssistance");
+        const dbassistanceName = await DB.formData.get("assistanceName");
+        const dbassistanceAmount = await DB.formData.get("assistanceAmount");
+        const dbassistanceRenew = await DB.formData.get("assistanceRenew");
+        const dbassistanceFrom = await DB.formData.get("assistanceFrom");
+        const dbassistanceTo = await DB.formData.get("assistanceTo");
+        const dbaidFrom = await DB.formData.get("aidFrom");
+        const dbaidTo = await DB.formData.get("aidTo");
+        const dbaidAmount = await DB.formData.get("aidAmount");
+        const dbpurposeOfAid = await DB.formData.get("purposeOfAid");
+        const dbanyHelp = await DB.formData.get("anyHelp");
+
+        // if the first or last name fields have not be added, add them
+        if (!dbnameOfInstitute)
+          await DB.formData.add({ id: "nameOfInstitute", value: "" });
+        if (!dbboardOfEducation)
+          await DB.formData.add({ id: "boardOfEducation", value: "" });
+        if (!dbtypeOfInstitute)
+          await DB.formData.add({ id: "typeOfInstitute", value: "" });
+        if (!dbcurrentGrade)
+          await DB.formData.add({ id: "currentGrade", value: "" });
+        if (!dbpercentage10)
+          await DB.formData.add({ id: "percentage10", value: "" });
+        if (!dbpercentage12)
+          await DB.formData.add({ id: "percentage12", value: "" });
+        if (!dbcourse) await DB.formData.add({ id: "course", value: "" });
+        if (!dbcgpa) await DB.formData.add({ id: "cgpa", value: "" });
+        if (!dbifAssistance)
+          await DB.formData.add({ id: "ifAssistance", value: "" });
+        if (!dbassistanceName)
+          await DB.formData.add({ id: "assistanceName", value: "" });
+        if (!dbassistanceAmount)
+          await DB.formData.add({ id: "assistanceAmount", value: "" });
+        if (!dbassistanceRenew)
+          await DB.formData.add({ id: "assistanceRenew", value: "" });
+        if (!dbassistanceFrom)
+          await DB.formData.add({ id: "assistanceFrom", value: "" });
+        if (!dbassistanceTo)
+          await DB.formData.add({ id: "assistanceTo", value: "" });
+        if (!dbaidFrom) await DB.formData.add({ id: "aidFrom", value: "" });
+        if (!dbaidTo) await DB.formData.add({ id: "aidTo", value: "" });
+        if (!dbaidAmount) await DB.formData.add({ id: "aidAmount", value: "" });
+        if (!dbpurposeOfAid)
+          await DB.formData.add({ id: "purposeOfAid", value: "" });
+        if (!dbanyHelp) await DB.formData.add({ id: "anyHelp", value: "" });
+
+        // set the initial values
+        setNameOfInstitute(dbnameOfInstitute.value);
+        setBoardOfEdu(dbboardOfEducation.value);
+        setTypeOfEdu(dbtypeOfInstitute.value);
+        setGrade(dbcurrentGrade.value);
+        setPercentageTen(dbpercentage10.value);
+        setPercentageTwel(dbpercentage12.value);
+        setCourse(dbcourse.value);
+        setCgpa(dbcgpa.value);
+        setHelp(dbifAssistance.value);
+        setAmount(dbassistanceAmount.value);
+        setAssist(dbassistanceName.value);
+        setRenew(dbassistanceRenew.value);
+        setFinFrom(dbassistanceFrom.value);
+        setFinTo(dbassistanceTo.value);
+        setAidFrom(dbaidFrom.value);
+        setAidTo(dbaidTo.value);
+        setGetAmount(dbaidAmount.value);
+        setPurpose(dbpurposeOfAid.value);
+        setAnyHelp(dbanyHelp.value);
+      }).catch((e) => {
+        // log any errors
+        console.log(e.stack || e);
+      });
+
+      // close the database connection if form is unmounted or the
+      // database connection changes
+      return () => DB.close();
+    },
+    // run effect whenever the database connection changes
+    [DB]
+  );
 
   const { t, i18n } = useTranslation();
 
@@ -187,19 +282,22 @@ const RequestForAid = () => {
               label={t("Name of Institute")}
               className="w-full"
               inputState={[nameOfInstitute, setNameOfInstitute]}
+              id="nameOfInstitute"
             />
             <div className="flex flex-col lg:flex-row items-center w-full lg:space-x-2 space-y-4 lg:space-y-0">
               <Dropdown
                 options={["CBSE", "State Board", "ICSE"]}
                 className="w-full"
                 placeholder={t("Board of Education")}
-                valueState={[boardOfEdu, setBoardOfEdu]}
+                valueState={[boardOfEdu, setBoardOfEdu]} 
+                id="boardOfEducation" 
               />
               <Dropdown
                 options={["Private", "Public"]}
                 className="w-full"
                 placeholder={t("Type of Institute")}
                 valueState={[TypeOfEdu, setTypeOfEdu]}
+                id="typeOfInstitute"
               />
             </div>
             <Dropdown
@@ -207,17 +305,20 @@ const RequestForAid = () => {
               options={grade}
               className="w-full"
               valueState={[Grade, setGrade]}
+              id="currentGrade"
             />
             <div className="flex flex-col lg:flex-row items-center w-full space-y-3 lg:space-y-0 lg:space-x-2">
               <TextField
                 label={t("10th Percent.")}
                 className="w-full lg:w-1/2"
                 inputState={[PercentageTen, setPercentageTen]}
+                id="percentage10"
               />
               <TextField
                 label={t("12th Percent.")}
                 className="w-full lg:w-1/2"
                 inputState={[PercentageTwel, setPercentageTwel]}
+                id="percentage12"
               />
             </div>
             <div className="flex items-center w-full space-x-3">
@@ -228,6 +329,7 @@ const RequestForAid = () => {
                 label={t("Name of Course")}
                 className="w-full"
                 inputState={[Course, setCourse]}
+                id="course"
               />
             </div>
             <div className="flex items-center w-full space-x-3">
@@ -238,6 +340,7 @@ const RequestForAid = () => {
                 label="CGPA"
                 className="w-full"
                 inputState={[Cgpa, setCgpa]}
+                id="cgpa"
               />
             </div>
           </div>
@@ -261,6 +364,7 @@ const RequestForAid = () => {
                 options={options}
                 className="w-full"
                 valueState={[Help, setHelp]}
+                id="ifAssistance"
               />
             </div>
 
@@ -272,6 +376,7 @@ const RequestForAid = () => {
                 label=""
                 className="w-full"
                 inputState={[Assist, setAssist]}
+                id="assistanceName"
               />
             </div>
 
@@ -284,12 +389,14 @@ const RequestForAid = () => {
                 type="date"
                 className="w-1/2 text-right"
                 inputState={[FinFrom, setFinFrom]}
+                id="assistanceFrom"
               />
               <TextField
                 label="To"
                 type="date"
                 className="w-full lg:w-1/2"
                 inputState={[FinTo, setFinTo]}
+                id="assistanceTo"
               />
             </div>
 
@@ -298,12 +405,14 @@ const RequestForAid = () => {
                 label={t("Total Amount received")}
                 className="w-full"
                 inputState={[Amount, setAmount]}
+                id="assistanceAmount"
               />
               <Dropdown
                 options={options}
                 className="w-full"
                 valueState={[Renew, setRenew]}
                 placeholder={t("Will be renewed")}
+                id="assistanceRenew"
               />
             </div>
           </div>
@@ -326,12 +435,14 @@ const RequestForAid = () => {
                 type="date"
                 className="w-full lg:w-1/2"
                 inputState={[AidFrom, setAidFrom]}
+                id="aidFrom"
               />
               <TextField
                 label="To"
                 type="date"
                 className="w-full lg:w-1/2"
                 inputState={[AidTo, setAidTo]}
+                id="aidTo"
               />
             </div>
 
@@ -343,18 +454,21 @@ const RequestForAid = () => {
                 label={t("Total Amount required (per year)")}
                 className="w-full"
                 inputState={[GetAmount, setGetAmount]}
+                id="aidAmount"
               />
             </div>
             <TextArea
               label={t("Purpose of Aid")}
               className="w-full"
               inputState={[Purpose, setPurpose]}
+              id="purposeOfAid"
             />
 
             <TextArea
               label={t("Enter if any help to be done")}
               className="w-full"
               inputState={[AnyHelp, setAnyHelp]}
+              id="anyHelp"
             />
           </div>
         </section>

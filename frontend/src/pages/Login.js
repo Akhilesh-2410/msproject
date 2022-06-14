@@ -47,7 +47,7 @@ const Login = () => {
   return (
     <main className="h-screen w-screen flex justify-center items-center bg-white">
       <div
-        className="hidden lg:block lg:w-[50vw] h-screen bg-clinic-700"
+        className="hidden lg:block lg:w-1/2 h-screen"
         style={{
           background: `url("${IMAGE_URL}")`,
           backgroundSize: "cover",
