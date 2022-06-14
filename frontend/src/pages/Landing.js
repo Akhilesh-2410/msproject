@@ -1,11 +1,12 @@
 import "../styles/landstyle.css";
 import React from "react";
+import NavBar from "../components/NavBar";
 
 const Landing = () => {
 
   return (
     <React.Fragment>
-
+      <NavBar/>
 
       <div className="box">
         <div className="top-Heading">We are building your future!</div>

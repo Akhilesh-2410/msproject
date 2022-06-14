@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { GET_POST_URL, GET_USER_DETAIL_URL } from "../api/APIRoutes";
 import TextOutput from "../components/TextOutput";
+import { GrDocumentImage, GrDocumentPdf } from "react-icons/gr";
 
 const SubmissionPreview = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -272,10 +273,12 @@ const SubmissionPreview = () => {
 
           <div className="w-full space-y-6">
             {documentDetails.map((doc) => (
-              <a target={"_blank"} href={doc.url}>
+              <a target={"_blank"} rel="noreferrer" href={doc.url}>
                 <p className="text-sm text-clinic-500 hover:underline cursor-pointer">
                   {doc.name}
                 </p>
+                <GrDocumentPdf className="w-12 h-auto" />
+                <GrDocumentImage/>
               </a>
             ))}
           </div>

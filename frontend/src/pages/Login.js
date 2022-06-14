@@ -45,17 +45,18 @@ const Login = () => {
     "https://i.ibb.co/Z20btqx/nathan-dumlao-P5-MXt-Yfgmmw-unsplash.jpg";
 
   return (
-    <main className="h-screen w-screen flex justify-center items-center bg-clinic-300">
+    <main className="h-screen w-screen flex justify-center items-center bg-white">
       <div
-        className="hidden lg:block lg:w-1/2 h-screen filter grayscale"
+        className="hidden lg:block lg:w-[50vw] h-screen bg-clinic-700"
         style={{
-          backgroundImage: `url("${IMAGE_URL}")`,
+          background: `url("${IMAGE_URL}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       ></div>
-      <div className="flex flex-col justify-start items-start lg:justify-center bg-white h-screen w-screen lg:w-1/2 px-6 lg:px-[calc(100vw/12)] py-20 space-y-6 shadow-lg rounded-md">
+      {/* <img src={IMAGE_URL} alt="" className="h-screen w-auto filter g/" /> */}
+      <div className="flex flex-col justify-start items-start lg:justify-center bg-white h-screen w-screen lg:w-1/2 px-6 lg:px-[calc(100vw/12)] py-20 space-y-6 rounded-md">
         <h1 className="font-oswald font-medium text-4xl">Login</h1>
         <TextField className="w-full" label="UID" inputState={[uid, setUid]} />
         <TextField

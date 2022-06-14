@@ -29,4 +29,5 @@ const userpostschema = new mongoose.Schema({
     },
   ],
 });
+
 module.exports = mongoose.model("UserPosts", userpostschema);
