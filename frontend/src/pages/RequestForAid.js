@@ -81,6 +81,28 @@ const RequestForAid = ({ db }) => {
         if (!dbpurposeOfAid)
           await DB.formData.add({ id: "purposeOfAid", value: "" });
         if (!dbanyHelp) await DB.formData.add({ id: "anyHelp", value: "" });
+        if (
+          dbnameOfInstitute?.value ||
+          dbboardOfEducation?.value ||
+          dbtypeOfInstitute?.value ||
+          dbcurrentGrade?.value ||
+          dbpercentage10?.value ||
+          dbpercentage12?.value ||
+          dbcourse?.value ||
+          dbcgpa?.value ||
+          dbifAssistance?.value ||
+          dbassistanceName?.value ||
+          dbassistanceAmount?.value ||
+          dbassistanceRenew?.value ||
+          dbassistanceFrom?.value ||
+          dbassistanceTo?.value ||
+          dbaidFrom?.value ||
+          dbaidTo?.value ||
+          dbaidAmount?.value ||
+          dbpurposeOfAid?.value ||
+          dbanyHelp?.value
+        )
+          setPopup("SUCCESS", "Draft Found!");
 
         // set the initial values
         setNameOfInstitute(dbnameOfInstitute.value);
@@ -119,8 +141,6 @@ const RequestForAid = ({ db }) => {
 
   const navigate = useNavigate();
 
-  const { setPopup } = useContext(PopupContext);
-
   const [nameOfInstitute, setNameOfInstitute] = useState("");
   const [boardOfEdu, setBoardOfEdu] = useState("");
   const [TypeOfEdu, setTypeOfEdu] = useState("");
@@ -141,6 +161,34 @@ const RequestForAid = ({ db }) => {
   const [Purpose, setPurpose] = useState("");
   const [AnyHelp, setAnyHelp] = useState("");
   const [documents, setDocuments] = useState([]);
+
+  const { setPopup } = useContext(PopupContext);
+
+  const clearDraft = () => {
+    DB.formData.put({ id: "nameOfInstitute", value: "" });
+    DB.formData.put({ id: "boardOfEducation", value: "" });
+    DB.formData.put({ id: "typeOfInstitute", value: "" });
+    DB.formData.put({ id: "currentGrade", value: "" });
+    DB.formData.put({ id: "percentage10", value: "" });
+    DB.formData.put({ id: "percentage12", value: "" });
+    DB.formData.put({ id: "course", value: "" });
+    DB.formData.put({ id: "cgpa", value: "" });
+    DB.formData.put({ id: "ifAssistance", value: "" });
+    DB.formData.put({ id: "assistanceName", value: "" });
+    DB.formData.put({ id: "assistanceAmount", value: "" });
+    DB.formData.put({ id: "assistanceRenew", value: "" });
+    DB.formData.put({ id: "assistanceFrom", value: "" });
+    DB.formData.put({ id: "assistanceTo", value: "" });
+    DB.formData.put({ id: "aidFrom", value: "" });
+    DB.formData.put({ id: "aidTo", value: "" });
+    DB.formData.put({ id: "aidAmount", value: "" });
+    DB.formData.put({ id: "purposeOfAid", value: "" });
+    DB.formData.put({ id: "anyHelp", value: "" });
+  };
+
+  // useEffect(() => {
+  //   clearDraft();
+  // }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -204,8 +252,6 @@ const RequestForAid = ({ db }) => {
     ) {
       alert("Please fill all the fields");
     } else {
-      
-
       uploadDocuments(documents)
         .then((res) => {
           console.log("UPLOAD_DOCUMENTS", res);
@@ -228,25 +274,7 @@ const RequestForAid = ({ db }) => {
               }
             )
             .then((response) => {
-              DB.formData.put({ id: "nameOfInstitute", value: "" });
-              DB.formData.put({ id: "boardOfEducation", value: "" });
-              DB.formData.put({ id: "typeOfInstitute", value: "" });
-              DB.formData.put({ id: "currentGrade", value: "" });
-              DB.formData.put({ id: "percentage10", value: "" });
-              DB.formData.put({ id: "percentage12", value: "" });
-              DB.formData.put({ id: "course", value: "" });
-              DB.formData.put({ id: "cgpa", value: "" });
-              DB.formData.put({ id: "ifAssistance", value: "" });
-              DB.formData.put({ id: "assistanceName", value: "" });
-              DB.formData.put({ id: "assistanceAmount", value: "" });
-              DB.formData.put({ id: "assistanceRenew", value: "" });
-              DB.formData.put({ id: "assistanceFrom", value: "" });
-              DB.formData.put({ id: "assistanceTo", value: "" });
-              DB.formData.put({ id: "aidFrom", value: "" });
-              DB.formData.put({ id: "aidTo", value: "" });
-              DB.formData.put({ id: "aidAmount", value: "" });
-              DB.formData.put({ id: "purposeOfAid", value: "" });
-              DB.formData.put({ id: "anyHelp", value: "" });
+              clearDraft();
               console.log(response);
               setPopup("SUCCESS", "Request sent successfully.");
               navigate("/forms/request-aid/success");
