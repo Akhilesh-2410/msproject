@@ -22,7 +22,9 @@ import { PopupProvider } from "./components/PopupContext";
 import Login from "./pages/Login";
 import AuthProvider, { AuthContext } from "./api/AuthProvider";
 import RequestForAidSuccess from "./pages/RequestForAidSuccess";
+import Dexie from "dexie";
 
+export const DB = new Dexie("RequestForFinAidDB");
 export const TransContext = React.createContext();
 export const formatDate = (date) =>
   `${date.split("-")[2]}/${date.split("-")[1]}/${date.split("-")[0]}`;
