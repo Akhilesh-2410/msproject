@@ -271,14 +271,24 @@ const SubmissionPreview = () => {
         <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b-border-[rgba(0,0,0,.4)]">
           <h1 className="font-semibold text-3xl w-full lg:w-1/4">Documents</h1>
 
-          <div className="w-full space-y-6">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 items-start justify-start">
             {documentDetails.map((doc) => (
-              <a target={"_blank"} rel="noreferrer" href={doc.url}>
-                <p className="text-sm text-clinic-500 hover:underline cursor-pointer">
+              <a
+                target={"_blank"}
+                rel="noreferrer"
+                href={doc.url}
+                className="flex flex-col space-y-2"
+              >
+                {console.log(doc.name.substring(doc.name.lastIndexOf("."))) ||
+                doc.name.substring(doc.name.lastIndexOf(".")) === ".jpg" ||
+                doc.name.substring(doc.name.lastIndexOf(".")) === ".png" ? (
+                  <GrDocumentImage className="w-12 h-auto" />
+                ) : (
+                  <GrDocumentPdf className="w-12 h-auto" />
+                )}
+                <p className="text-sm text-clinic-500 hover:underline cursor-pointer w-[10ch]">
                   {doc.name}
                 </p>
-                <GrDocumentPdf className="w-12 h-auto" />
-                <GrDocumentImage/>
               </a>
             ))}
           </div>
