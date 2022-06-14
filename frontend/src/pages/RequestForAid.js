@@ -282,19 +282,22 @@ const RequestForAid = ({ db }) => {
               label={t("Name of Institute")}
               className="w-full"
               inputState={[nameOfInstitute, setNameOfInstitute]}
+              id="nameOfInstitute"
             />
             <div className="flex flex-col lg:flex-row items-center w-full lg:space-x-2 space-y-4 lg:space-y-0">
               <Dropdown
                 options={["CBSE", "State Board", "ICSE"]}
                 className="w-full"
                 placeholder={t("Board of Education")}
-                valueState={[boardOfEdu, setBoardOfEdu]}
+                valueState={[boardOfEdu, setBoardOfEdu]} 
+                id="boardOfEducation" 
               />
               <Dropdown
                 options={["Private", "Public"]}
                 className="w-full"
                 placeholder={t("Type of Institute")}
                 valueState={[TypeOfEdu, setTypeOfEdu]}
+                id="typeOfInstitute"
               />
             </div>
             <Dropdown
@@ -302,17 +305,20 @@ const RequestForAid = ({ db }) => {
               options={grade}
               className="w-full"
               valueState={[Grade, setGrade]}
+              id="currentGrade"
             />
             <div className="flex flex-col lg:flex-row items-center w-full space-y-3 lg:space-y-0 lg:space-x-2">
               <TextField
                 label={t("10th Percent.")}
                 className="w-full lg:w-1/2"
                 inputState={[PercentageTen, setPercentageTen]}
+                id="percentage10"
               />
               <TextField
                 label={t("12th Percent.")}
                 className="w-full lg:w-1/2"
                 inputState={[PercentageTwel, setPercentageTwel]}
+                id="percentage12"
               />
             </div>
             <div className="flex items-center w-full space-x-3">
@@ -323,6 +329,7 @@ const RequestForAid = ({ db }) => {
                 label={t("Name of Course")}
                 className="w-full"
                 inputState={[Course, setCourse]}
+                id="course"
               />
             </div>
             <div className="flex items-center w-full space-x-3">
@@ -333,6 +340,7 @@ const RequestForAid = ({ db }) => {
                 label="CGPA"
                 className="w-full"
                 inputState={[Cgpa, setCgpa]}
+                id="cgpa"
               />
             </div>
           </div>
@@ -356,6 +364,7 @@ const RequestForAid = ({ db }) => {
                 options={options}
                 className="w-full"
                 valueState={[Help, setHelp]}
+                id="ifAssistance"
               />
             </div>
 
@@ -367,6 +376,7 @@ const RequestForAid = ({ db }) => {
                 label=""
                 className="w-full"
                 inputState={[Assist, setAssist]}
+                id="assistanceName"
               />
             </div>
 
@@ -379,12 +389,14 @@ const RequestForAid = ({ db }) => {
                 type="date"
                 className="w-1/2 text-right"
                 inputState={[FinFrom, setFinFrom]}
+                id="assistanceFrom"
               />
               <TextField
                 label="To"
                 type="date"
                 className="w-full lg:w-1/2"
                 inputState={[FinTo, setFinTo]}
+                id="assistanceTo"
               />
             </div>
 
@@ -393,12 +405,14 @@ const RequestForAid = ({ db }) => {
                 label={t("Total Amount received")}
                 className="w-full"
                 inputState={[Amount, setAmount]}
+                id="assistanceAmount"
               />
               <Dropdown
                 options={options}
                 className="w-full"
                 valueState={[Renew, setRenew]}
                 placeholder={t("Will be renewed")}
+                id="assistanceRenew"
               />
             </div>
           </div>
@@ -421,12 +435,14 @@ const RequestForAid = ({ db }) => {
                 type="date"
                 className="w-full lg:w-1/2"
                 inputState={[AidFrom, setAidFrom]}
+                id="aidFrom"
               />
               <TextField
                 label="To"
                 type="date"
                 className="w-full lg:w-1/2"
                 inputState={[AidTo, setAidTo]}
+                id="aidTo"
               />
             </div>
 
@@ -438,18 +454,21 @@ const RequestForAid = ({ db }) => {
                 label={t("Total Amount required (per year)")}
                 className="w-full"
                 inputState={[GetAmount, setGetAmount]}
+                id="aidAmount"
               />
             </div>
             <TextArea
               label={t("Purpose of Aid")}
               className="w-full"
               inputState={[Purpose, setPurpose]}
+              id="purposeOfAid"
             />
 
             <TextArea
               label={t("Enter if any help to be done")}
               className="w-full"
               inputState={[AnyHelp, setAnyHelp]}
+              id="anyHelp"
             />
           </div>
         </section>

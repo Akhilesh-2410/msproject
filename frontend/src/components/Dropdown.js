@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiFillExclamationCircle } from "react-icons/ai";
+import { DB } from "../App";
 
 const Dropdown = ({
   valueState = ["", (v) => {}],
@@ -9,6 +10,7 @@ const Dropdown = ({
   title = "",
   isDisabled = false,
   className = "w-full",
+  id = "",
 }) => {
   const [value, setValue] = valueState;
   const [error, setError] = errorState;
@@ -31,6 +33,7 @@ const Dropdown = ({
           value={value}
           onChange={(e) => {
             e.preventDefault();
+            if (id.length > 0) DB.formData.put({ id, value: e.target.value });
             setValue(e.target.value);
             setError("");
           }}
