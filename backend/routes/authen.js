@@ -17,12 +17,12 @@ const vonage = new Vonage({
 
 router.post("/approval", requirelogin, (req, res) => {
   userpost
-    .findByIdAndUpdate(
-      req.body.uid,
-      {
-        $set: { status: req.body.status },
-      },
-      { new: true }
+    .findOne(
+      { uid: req.body.uid }
+      // {
+      //   $set: { status: req.body.status },
+      // },
+      // { new: true }
     )
     .exec((err, result) => {
       if (err) return res.status(422).json({ error: err });
@@ -30,7 +30,7 @@ router.post("/approval", requirelogin, (req, res) => {
     });
   const from = "St.JUDES";
   const to = req.body.phno;
-  const text = `Your status for ${req.body.requirementType} has been ${req.body.status}.\nPlease contact admin for further details.\nThank you have a nice day";`;
+  const text = `Your status for Request for Aid has been ${req.body.status}.\nPlease contact admin for further details.\nThank you have a nice day";`;
   vonage.message.sendSms(from, to, text, (err, responseData) => {
     if (err) {
       console.log(err);
@@ -129,6 +129,7 @@ router.post("/signup", (req, res) => {
       console.log(err);
     });
 });
+
 router.post("/signin", (req, res) => {
   const { uid, dob } = req.body;
   if (!uid || !dob)
@@ -148,6 +149,13 @@ router.post("/signin", (req, res) => {
       .catch((err) => {
         console.log(err);
       });
+  });
+});
+
+router.get("/userDetails/:uid", (req, res) => {
+  User.findOne({ uid: req.params.uid }).then((saveduser) => {
+    if (!saveduser) return res.status(404).json({ error: "UID Not found" });
+    res.json(saveduser);
   });
 });
 

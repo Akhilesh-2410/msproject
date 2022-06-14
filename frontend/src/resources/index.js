@@ -4,6 +4,8 @@ const resources = {
       // Navbar
       "Request for Aid": "Request for Aid",
       "Contact Us": "Contact Us",
+      "Provide all the following details appropriately.":
+        "Provide all the following details appropriately.",
       // Buttons
       Submit: "Submit",
       Cancel: "Cancel",
@@ -55,6 +57,8 @@ const resources = {
       // Navbar
       "Request for Aid": "உதவிக்கான கோரிக்கை",
       "Contact Us": "தொடர்பு கொள்ள",
+      "Provide all the following details appropriately.":
+        "பின்வரும் அனைத்து விவரங்களையும் சரியான முறையில் வழங்கவும்.",
       // Buttons
       Submit: "சமர்ப்பிக்கவும்",
       Cancel: "ரத்து செய்",
@@ -106,6 +110,9 @@ const resources = {
       // Navbar
       "Request for Aid": "सहायता के लिए अनुरोध",
       "Contact Us": "संपर्क करें",
+      "Provide all the following details appropriately.":
+        "Provide all the following details appropriately.",
+
       // Buttons
       Submit: "प्रस्तुत करना",
       Cancel: "रद्द करना",

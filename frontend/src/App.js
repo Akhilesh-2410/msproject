@@ -21,6 +21,7 @@ import CreateUID from "./pages/CreateUID";
 import { PopupProvider } from "./components/PopupContext";
 import Login from "./pages/Login";
 import AuthProvider, { AuthContext } from "./api/AuthProvider";
+import RequestForAidSuccess from "./pages/RequestForAidSuccess";
 
 export const TransContext = React.createContext();
 export const formatDate = (date) =>
@@ -61,6 +62,10 @@ const App = () => {
                   <Route
                     path="request-aid/financial"
                     element={<RequestForAid />}
+                  />
+                  <Route
+                    path="request-aid/success"
+                    element={<RequestForAidSuccess />}
                   />
                   <Route
                     path="request-aid/non-financial"

@@ -32,6 +32,7 @@ const Login = () => {
       .then((res) => {
         setPopup("SUCCESS", "Login Successful");
         setAuthState(res.data.token, "user");
+        localStorage.setItem("uid", uid);
         navigate("/");
       })
       .catch((err) => {

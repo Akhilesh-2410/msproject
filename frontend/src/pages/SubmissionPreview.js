@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { GET_POST_URL, GET_USER_DETAIL_URL } from "../api/APIRoutes";
 import TextOutput from "../components/TextOutput";
 
 const SubmissionPreview = () => {
@@ -7,10 +9,54 @@ const SubmissionPreview = () => {
   const [uid, setUid] = useState("");
   const [type, setType] = useState(0);
 
+  const [userDetails, setUserDetails] = useState({});
+  const [requestDetails, setRequestDetails] = useState({});
+  const [documentDetails, setDocumentDetails] = useState([]);
+
   useEffect(() => {
+    // console.log(searchParams.get("uid"));
     setUid(searchParams.get("uid"));
     setType(parseInt(searchParams.get("type")));
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${GET_USER_DETAIL_URL}/${searchParams.get("uid")}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setUserDetails(res.data);
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(`${GET_POST_URL}/${searchParams.get("uid")}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setRequestDetails(res.data.data);
+        setDocumentDetails(res.data.document);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    console.log(userDetails);
+    console.log(requestDetails);
+    console.log(documentDetails);
+  }, [userDetails, requestDetails, documentDetails]);
+
+  const handleApproval = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <main className="w-full h-full font-poppins relative">
@@ -44,46 +90,75 @@ const SubmissionPreview = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
             <TextOutput label={"UID"} text={uid} />
-            <TextOutput label={"Name"} text={"John Doe"} />
-            <TextOutput label={"Date of Birth"} text={"29/11/2006"} />
-            <TextOutput label={"Contact no."} text={"9988776600"} />
-            <TextOutput label={"Email Address"} text={"johndoe@example.com"} />
-            <TextOutput label={"Aadhar Number"} text={"564564646657657"} />
-            <TextOutput label={"Parent/Guardian Name"} text={"Alice Doe"} />
+            <TextOutput label={"Name"} text={userDetails.name} />
+            <TextOutput label={"Contact no."} text={userDetails.phone} />
+            <TextOutput label={"Email Address"} text={userDetails.email} />
+            <TextOutput
+              label={"Aadhar Number"}
+              text={userDetails.AadharNumber}
+            />
+            <TextOutput
+              label={"Parent/Guardian Name"}
+              text={userDetails.parent_name}
+            />
             <TextOutput
               label={"Parent/Guardian Occupation"}
-              text={"Software Engineer"}
+              text={userDetails.parent_occupation}
             />
             <TextOutput
               label={"Parent/Guardian Contact no."}
-              text={"9977665500"}
+              text={userDetails.parent_phno}
             />
-            <TextOutput label={"Address"} text={"123, ABC Road"} />
-            <TextOutput label={"City"} text={"Bangalore"} />
-            <TextOutput label={"State"} text={"Karnataka"} />
+            <TextOutput label={"Address"} text={userDetails.address} />
+            <TextOutput label={"City"} text={userDetails.city} />
+            <TextOutput label={"State"} text={userDetails.state} />
           </div>
         </section>
-        <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
-          <h1 className="font-semibold text-3xl w-full lg:w-1/4">
-            Academic Info
-          </h1>
 
-          <div className="w-full space-y-6">
-            <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
-              <TextOutput label={"Name of Institute"} text={"ABC School"} />
-              <TextOutput label={"Board of Education"} text={"CBSE"} />
-              <TextOutput label={"Type of Institute"} text={"Private"} />
-              <TextOutput label={"Current Grade"} text={"VIII"} />
-              <TextOutput label={"10th Percent."} text={"--"} />
-              <TextOutput label={"12th Percent."} text={"--"} />
-              <TextOutput
-                label={"If College, Course taken"}
-                text={"Engineering"}
-              />
-              <TextOutput label={"If College, CGPA (last SEM)"} text={"9.45"} />
+        {type === 1 && (
+          <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
+            <h1 className="font-semibold text-3xl w-full lg:w-1/4">
+              Academic Info
+            </h1>
+
+            <div className="w-full space-y-6">
+              <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
+                <TextOutput
+                  label={"Name of Institute"}
+                  text={requestDetails.nameOfInstitute}
+                />
+                <TextOutput
+                  label={"Board of Education"}
+                  text={requestDetails.boardOfEducation}
+                />
+                <TextOutput
+                  label={"Type of Institute"}
+                  text={requestDetails.typeOfInstitute}
+                />
+                <TextOutput
+                  label={"Current Grade"}
+                  text={requestDetails.currentGrade}
+                />
+                <TextOutput
+                  label={"10th Percent."}
+                  text={requestDetails.percentage10}
+                />
+                <TextOutput
+                  label={"12th Percent."}
+                  text={requestDetails.percentage12}
+                />
+                <TextOutput
+                  label={"If College, Course taken"}
+                  text={requestDetails.course}
+                />
+                <TextOutput
+                  label={"If College, CGPA (last SEM)"}
+                  text={requestDetails.cgpa}
+                />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {type === 1 && (
           <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b border-[rgba(0,0,0,.4)]">
@@ -95,15 +170,24 @@ const SubmissionPreview = () => {
               <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
                 <TextOutput
                   label={"Applied for any assistance ?"}
-                  text={"No"}
+                  text={requestDetails.ifAssistance}
                 />
                 <TextOutput
                   label={"Financial Assistance being received"}
-                  text={"CBSE"}
+                  text={requestDetails.assistanceName}
                 />
-                <TextOutput label={"Assisted for Period of"} text={"NA"} />
-                <TextOutput label={"Total Amount received"} text={"NA"} />
-                <TextOutput label={"Will be renewed"} text={"No"} />
+                <TextOutput
+                  label={"Assisted for Period of"}
+                  text={`From: ${requestDetails.assistanceFrom} To: ${requestDetails.assistanceTo}`}
+                />
+                <TextOutput
+                  label={"Total Amount received"}
+                  text={requestDetails.assistanceAmount}
+                />
+                <TextOutput
+                  label={"Will be renewed"}
+                  text={requestDetails.assistanceRenew}
+                />
               </div>
             </div>
           </section>
@@ -117,23 +201,32 @@ const SubmissionPreview = () => {
 
             <div className="w-full space-y-6">
               <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
-                <TextOutput label={"Language"} text={"English"} />
-                <TextOutput label={"Profession"} text={"Student"} />
+                <TextOutput label={"Language"} text={requestDetails.language} />
+                <TextOutput
+                  label={"Profession"}
+                  text={requestDetails.profession}
+                />
                 <TextOutput
                   label={"Organisation"}
-                  text={"PSG College of technology"}
+                  text={requestDetails.organization}
                 />
-                <TextOutput label={"Grade"} text={"VIII"} />
-                <TextOutput label={"Purpose for Aid"} text={"NA"} />
+                <TextOutput label={"Grade"} text={requestDetails.grade} />
+                <TextOutput
+                  label={"Purpose for Aid"}
+                  text={requestDetails.purposeOfAid}
+                />
                 <TextOutput
                   label={"Counselling Type"}
-                  text={"Induction Counselling"}
+                  text={requestDetails.counselling}
                 />
                 <TextOutput
                   label={"Received Any help Previously"}
-                  text={"No"}
+                  text={requestDetails.ifHelp}
                 />
-                <TextOutput label={"Any other help needed"} text={"NA"} />
+                <TextOutput
+                  label={"Any other help needed"}
+                  text={requestDetails.anyHelp}
+                />
               </div>
             </div>
           </section>
@@ -161,10 +254,13 @@ const SubmissionPreview = () => {
 
             <div className="w-full space-y-6">
               <div className="grid grid-cols-2 lg:grid-cols-3 items-start w-full gap-y-6 gap-x-6">
-                <TextOutput label={"Required for Period of"} text={"NA"} />
+                <TextOutput
+                  label={"Required for Period of"}
+                  text={`From: ${requestDetails.aidFrom} To: ${requestDetails.aidTo}`}
+                />
                 <TextOutput
                   label={"Total Amount required (per year)"}
-                  text={"NA"}
+                  text={requestDetails.aidAmount}
                 />
               </div>
             </div>
@@ -174,7 +270,15 @@ const SubmissionPreview = () => {
         <section className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full space-y-6 lg:space-y-0 lg:space-x-24 pb-8 border-b-border-[rgba(0,0,0,.4)]">
           <h1 className="font-semibold text-3xl w-full lg:w-1/4">Documents</h1>
 
-          <div className="w-full space-y-6"></div>
+          <div className="w-full space-y-6">
+            {documentDetails.map((doc) => (
+              <a target={"_blank"} href={doc.url}>
+                <p className="text-sm text-clinic-500 hover:underline cursor-pointer">
+                  {doc.name}
+                </p>
+              </a>
+            ))}
+          </div>
         </section>
       </main>
     </main>

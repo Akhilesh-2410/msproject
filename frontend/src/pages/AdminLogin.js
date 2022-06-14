@@ -32,6 +32,7 @@ const AdminLogin = () => {
       .then((res) => {
         setPopup("SUCCESS", "Admin Login Successful");
         setAuthState(res.data.token, "admin");
+        localStorage.setItem("uid", null);
         navigate("/admin");
       })
       .catch((err) => {

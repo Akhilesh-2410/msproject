@@ -11,10 +11,11 @@ const AdminWrapper = () => {
     if (
       localStorage.getItem("role") !== "admin" ||
       localStorage.getItem("access_token") === null
-    ) navigate("/admin/login");
-    
-      
+    )
+      navigate("/admin/login");
   }, []);
+
+  const { logout } = useContext(AuthContext);
 
   return (
     <main className="flex items-center justify-center h-screen w-screen relative overflow-hidden">
@@ -39,7 +40,13 @@ const AdminWrapper = () => {
           <p className="text-white text-lg">Create Admin</p>
         </button>
         <div className="flex-1"></div>
-        <button className="px-6 py-3 w-full flex items-center justify-start space-x-3 hover:bg-clinic-500">
+        <button
+          onClick={(e) => {
+            logout();
+            navigate("/admin/login");
+          }}
+          className="px-6 py-3 w-full flex items-center justify-start space-x-3 hover:bg-clinic-500"
+        >
           <FiLogOut className="text-white w-6 h-6" />
           <p className="text-white text-lg">Logout</p>
         </button>
@@ -62,7 +69,13 @@ const AdminWrapper = () => {
             <RiAdminLine className="text-white w-6 h-6" />
             {/* <p className="text-xs text-white whitespace-nowrap">Create Admin</p> */}
           </button>
-          <button className="p-2 flex flex-1 flex-col items-center justify-center">
+          <button
+            onClick={(e) => {
+              logout();
+              navigate("/admin/login");
+            }}
+            className="p-2 flex flex-1 flex-col items-center justify-center"
+          >
             <FiLogOut className="text-white w-6 h-6" />
             {/* <p className="text-xs text-white">Logout</p> */}
           </button>

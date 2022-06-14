@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiFilter } from "react-icons/fi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { GET_ALL_POST_URL, GET_USER_DETAIL_URL } from "../api/APIRoutes";
 
 const Submissions = () => {
+  const [submissions, setSubmissions] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(GET_ALL_POST_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        setSubmissions(
+          res.data.filter(
+            (x) =>
+              x.requirementType === "2" ||
+              x.requirementType === "3" ||
+              x.requirementType === "1"
+          )
+        );
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(submissions);
+  }, [submissions]);
+
   return (
     <main className="w-full h-full font-poppins">
       <nav className="w-full flex p-6">
@@ -17,24 +49,14 @@ const Submissions = () => {
         </button>
       </section>
       <section className="w-full flex flex-col space-y-4 items-center justify-center px-6 mt-6 lg:pr-[10vw]">
-        <SubmissionCard
-          name="John Doe"
-          type={1}
-          date="24/JUN/2019"
-          uid="435456546"
-        />
-        <SubmissionCard
-          name="John Doe"
-          type={2}
-          date="24/JUN/2019"
-          uid="435456546"
-        />
-        <SubmissionCard
-          name="John Doe"
-          type={1}
-          date="24/JUN/2019"
-          uid="435456546"
-        />
+        {submissions.map((x) => (
+          <SubmissionCard
+            key={x._id}
+            name={x.userid}
+            type={parseInt(x.requirementType)}
+            uid={x.userid}
+          />
+        ))}
       </section>
     </main>
   );
@@ -42,12 +64,7 @@ const Submissions = () => {
 
 export default Submissions;
 
-export const SubmissionCard = ({
-  name,
-  type,
-  date,
-  uid,
-}) => {
+export const SubmissionCard = ({ name, type, uid }) => {
   return (
     <div className="bg-clinic-300 w-full rounded-md shadow-md px-6 py-2 flex flex-col lg:flex-row items-start justify-between">
       <div className="">
@@ -61,10 +78,10 @@ export const SubmissionCard = ({
       </div>
       <div className="flex items-center mt-4 lg:mt-0 w-full lg:w-fit justify-between lg:justify-center space-x-4">
         <div className="space-y-1">
-          <div className="flex items-center justify-center space-x-1">
+          {/* <div className="flex items-center justify-center space-x-1">
             <AiOutlineCalendar className="text-clinic-500" />
             <p className="text-xs text-clinic-500">{date}</p>
-          </div>
+          </div> */}
           <div className="flex items-center justify-center space-x-1">
             <p className="text-xs text-clinic-500">UID : </p>
             <p className="text-xs text-clinic-500">{uid}</p>
